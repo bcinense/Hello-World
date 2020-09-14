@@ -7,7 +7,7 @@ body {
   background-size: cover;
   background-position: center;
 }
-/* Image size of img src on products_display.html */
+/* Image size of each image on products_display.html */
 img {
   width: 200px;
   height: 200px;
@@ -38,7 +38,7 @@ main {
 p {
   background-color: white;
 }
-/* Add a white background to the text in the footer */
+/* Add a white background to the text and center in the footer */
 footer {
   background-color: white;
   text-align: center;
