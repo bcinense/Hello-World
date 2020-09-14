@@ -7,11 +7,6 @@ li {
   margin-left: 50px;
   margin-right: 50px;
 }
-#navigationbar a {
-  display: inline;
-  margin-left: 50px;
-  margin-right: 50px;
-}
 body {
   font-family: "Open Sans", sans-serif;
   color: Darkblue;
@@ -26,13 +21,13 @@ img {
   float: left;
   margin-right: 10px;
 }
-.left {
-  float: left;
+.right {
+  float: right;
   width: 300px;
   padding: 1em;
 }
-.right {
-  float: right;
+.left {
+  float: left;
   width: 300px;
   padding: 1em;
 }
