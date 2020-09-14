@@ -1,0 +1,45 @@
+/* Background image of the phone globe to center, fit and no-repeat diplayed on the whole page */
+body {
+  width: 800px;
+  margin: 0 auto;
+  background-image: url(Images/phone_globe1.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+/* Image size of img src on products_display.html */
+img {
+  width: 200px;
+  height: 200px;
+}
+/* To center the header text and give that text the background color of white */
+H1 {
+  text-align: center;
+  background-color: white;
+}
+/* To center the header text and give that text the background color of white */
+H2 {
+  text-align: center;
+  background-color: white;
+}
+/* Creates a border around the text in the body from the products_display.html */
+body div {
+  border: 5px solid black;
+  display: flex;
+}
+/* Space out the images */
+main {
+  text-align: center;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+/* Add a white background to the phone prices to see them more clearly */
+p {
+  background-color: white;
+}
+/* Add a white background to the text in the footer */
+footer {
+  background-color: white;
+  text-align: center;
+}
