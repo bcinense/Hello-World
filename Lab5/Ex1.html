@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="ageDiv"></div>
+  </body>
+</html>
+<script>
+  first_name = "Brittany";
+  var middle_name = "<p>Brittany</p>".italics();
+  var last_name = "<p>Cinense</p>".fontsize(10);
+  var full_name = first_name + " " + middle_name + " " + last_name;
+  var formatted_name = full_name;
+  document.write(formatted_name);
+  var numberOfKids = 2;
+  myAge = 25;
+  document.getElementById("ageDiv").innerHTML =
+    "I want " + numberOfKids + " kids.";
+  var number = 4.125;
+  number.toFixed();
+  document.write(first_name + "'s" + " bill is " + number.toFixed(2));
+</script>
