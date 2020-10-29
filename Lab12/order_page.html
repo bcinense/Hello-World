@@ -24,14 +24,15 @@
       ).join(" ");
     }
     // Function to display purchase when button is clicked
-    function displayPurchase() {
-      if (isNonNegInt(quantity_textbox.value)) {
-        document.write(
-          `Thank for you for ordering ${quantity_textbox.value} things!`
-        );
+    function displayPurchase(purchase_qty) {
+      if (isNonNegInt(purchase_qty)) {
+        document.write(`Thank for you for ordering ${purchase_qty} things!`);
       } else {
-        alert(`Please enter a valid quantity!`);
+        checkQuantityTextbox();
       }
+      // else {
+      //   alert(`Please enter a valid quantity!`);
+      // }
     }
   </script>
   <body>
@@ -43,14 +44,14 @@
     <!-- Exercise1b. -->
     <form name="quantity_form" action="" onsubmit="displayPurchase();">
       <label for="Quantity_textbox">Quantity Desired</label>
-      <input
-        type="text"
-        id="quantity_textbox"
-        onkeyup="checkQuantityTextbox();"
-      />
+      <input type="text" id="quantity_textbox" />
       <span id="qty_textbox_message">Enter a quantity</span>
       <!-- Button element -->
-      <input type="button" value="Purchase" onclick="displayPurchase();" />
+      <input
+        type="button"
+        value="Purchase"
+        onclick="displayPurchase(quantity_textbox.value);"
+      />
     </form>
   </body>
 </html>
