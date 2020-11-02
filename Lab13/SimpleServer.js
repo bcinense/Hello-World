@@ -1,3 +1,6 @@
+// This is a dynamic web page becasue the Date is being uploaded in real-time on the client and server-side. The time on the client side is higher than the server side because the client side is executed after the browser is loaded. The server side time is generated on the server before the client.
+// The request does not matter, the route for the HTTP request is handled the same everytime because the program is made that way.
+// The Javascript for the server side is executed on the server thats why it is not in the <script> tag.
 var http = require("http");
 
 //create a server object:

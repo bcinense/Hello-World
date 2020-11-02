@@ -6,6 +6,12 @@
     <title>Document</title>
   </head>
   <script>
+    let params = new URL(document.location).searchParams;
+    GET = {};
+    params.forEach(function (value, key) {
+      GET[key] = value;
+    });
+
     function isNonNegInt(q, returnErrors = false) {
       errors = []; // assume no errors at first
       if (Number(q) != q) {
@@ -24,7 +30,8 @@
       ).join(" ");
     }
     // Function to display purchase when button is clicked
-    function displayPurchase(purchase_qty) {
+    function displayPurchase() {
+      purchase_qty = GET["quantity_textbox"].value;
       if (isNonNegInt(purchase_qty)) {
         document.write(`Thank for you for ordering ${purchase_qty} things!`);
       } else {
@@ -34,6 +41,10 @@
       //   alert(`Please enter a valid quantity!`);
       // }
     }
+    if (typeof GET["quantity_textbox"] != "undefined") {
+      displayPurchase();
+      window.stop();
+    }
   </script>
   <body>
     <!-- Excersise1a. -->
@@ -42,16 +53,12 @@
     <span id="qty_textbox_message">Enter a quantity</span> -->
 
     <!-- Exercise1b. -->
-    <form name="quantity_form" action="" onsubmit="displayPurchase();">
+    <form name="quantity_form" action="" method="GET">
       <label for="Quantity_textbox">Quantity Desired</label>
-      <input type="text" id="quantity_textbox" />
+      <input type="text" name="quantity_textbox" />
       <span id="qty_textbox_message">Enter a quantity</span>
       <!-- Button element -->
-      <input
-        type="button"
-        value="Purchase"
-        onclick="displayPurchase(quantity_textbox.value);"
-      />
+      <input type="submit" value="Purchase" />
     </form>
   </body>
 </html>
