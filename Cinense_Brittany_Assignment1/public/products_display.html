@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Link stylesheet -->
+    <link rel="stylesheet" href="products-style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Link to the product_data.js file to pull data from (uses GET request) -->
+    <script src="./product_data.js" type="text/javascript"></script>
+    <title>Produce Store</title>
+  </head>
+  <body>
+    <h1>Local Produce</h1>
+    <form name="purchaseForm" action="./process_form" method="POST">
+      <script>
+        //For loop used to output images from product_data.js file
+        for (i = 0; i < product_data.length; i++) {
+          document.write(`
+                <div id = display_products>
+        <h2>${product_data[i].veggie}</h2>
+        <img src="${product_data[i].image}">
+        <p><strong>Price: </strong>$${product_data[i].price + "/lb"}</p>
+        <input type="text" placeholder="Enter Quantity Here!" name="${
+          product_data[i].veggie
+        }">
+        </div>`);
+        }
+        // Render submit Purchase button
+        document.write(
+          `<input type="submit" value='Purchase' name="purchase_submit_button">`
+        );
+      </script>
+    </form>
+  </body>
+</html>

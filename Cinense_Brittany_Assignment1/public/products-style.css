@@ -1,0 +1,17 @@
+/* Set Background Color */
+body {
+  background-color: #e6ffe5;
+  font-family: sans-serif;
+}
+
+/* Center, create a white background and change font to title */
+H1 {
+  text-align: center;
+  background-color: white;
+  font-family: cursive;
+}
+/* // Place border around each product */
+#display_products {
+  border-style: solid;
+  border-color: 1px black;
+}
