@@ -14,4 +14,5 @@ H1 {
 #display_products {
   border-style: solid;
   border-color: 1px black;
+  display: inline-block;
 }
