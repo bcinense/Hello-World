@@ -5,7 +5,7 @@ body {
 }
 
 /* Center, create a white background and change font to title */
-H1 {
+.title {
   text-align: center;
   background-color: white;
   font-family: cursive;

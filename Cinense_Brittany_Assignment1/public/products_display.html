@@ -10,8 +10,10 @@
     <title>Produce Store</title>
   </head>
   <body>
-    <h1>Local Produce</h1>
-    <br />
+    <div class="title">
+      <h1>Local Produce</h1>
+    </div>
+
     <form name="purchaseForm" action="./process_form" method="POST">
       <script>
         //For loop used to output images from product_data.js file
@@ -19,7 +21,8 @@
           document.write(`
                 <div id = display_products>
         <h2>${product_data[i].veggie}</h2>
-        <img src="${product_data[i].image}">
+        <div class  = "image">
+        <img src="${product_data[i].image}"></div>
         <p><strong>Price: </strong>$${
           product_data[i].price.toFixed(2) + "/lb"
         }</p>
