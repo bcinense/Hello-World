@@ -16,3 +16,8 @@ body {
   border-color: 1px black;
   display: inline-block;
 }
+
+img {
+  max-width: 200px;
+  max-height: 200px;
+}
