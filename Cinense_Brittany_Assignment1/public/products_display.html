@@ -19,7 +19,9 @@
                 <div id = display_products>
         <h2>${product_data[i].veggie}</h2>
         <img src="${product_data[i].image}">
-        <p><strong>Price: </strong>$${product_data[i].price + "/lb"}</p>
+        <p><strong>Price: </strong>$${
+          product_data[i].price.toFixed(2) + "/lb"
+        }</p>
         <input type="text" placeholder="Enter Quantity Here!" name="${
           product_data[i].veggie
         }">
