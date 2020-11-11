@@ -40,6 +40,7 @@ app.post("/process_form", function (request, response) {
         extendedPrice = quantity * product.price;
         subtotal += extendedPrice;
         // Generate invoice rows
+
         invoiceRows += `
           <tr>
             <th style="text-align: center" width="43%">${product.veggie}</td>
