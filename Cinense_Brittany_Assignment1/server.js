@@ -46,10 +46,10 @@ app.post("/process_form", function (request, response) {
             <th style="text-align: center" width="11%">
               ${quantity}
             </td>
-            <th style="text-align: center" width="13%">${product.price.toFixed(
+            <th style="text-align: center" width="13%">$${product.price.toFixed(
               2
             )}</td>
-            <th style="text-align: center" width="54%">${extendedPrice.toFixed(
+            <th style="text-align: center" width="54%">$${extendedPrice.toFixed(
               2
             )}</td>
           </tr>
