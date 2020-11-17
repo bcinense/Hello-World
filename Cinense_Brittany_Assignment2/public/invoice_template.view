@@ -1,0 +1,42 @@
+  <!-- Invoice template used from Invoice WODS-->
+ <table border="2">
+      <tbody>
+        <tr>
+          <th style="text-align: center" width="43%">Item</th>
+          <th style="text-align: center" width="11%">Quantity</th>
+          <th style="text-align: center" width="13%">Price</th>
+          <th style="text-align: center" width="54%">Amount</th>
+        </tr>
+        ${invoiceRows}
+        <tr>
+          <td colspan="4" width="100%">&nbsp;</td>
+        </tr>
+        <!-- Row for Sub-total -->
+        <tr>
+          <td style="text-align: center" colspan="3" width="67%">Sub-total</td>
+          <td width="54%">
+         $${subtotal.toFixed(2)}
+          </td>
+        </tr>
+        <!-- Row for Tax -->
+        <tr>
+          <td style="text-align: center" colspan="3" width="67%">
+            <span style="font-family: arial">Tax @ 5.75%</span>
+          </td>
+          <td width="54%">
+          $${tax.toFixed(2)}
+          </td>
+        </tr>
+        <!-- Row for Total with bold font -->
+        <tr>
+          <td style="text-align: center" colspan="3" width="67%">
+            <strong>Total</strong>
+          </td>
+          <td width="54%">
+            <b>
+             $${total.toFixed(2)}
+            </b>
+          </td>
+        </tr>
+      </tbody>
+    </table>

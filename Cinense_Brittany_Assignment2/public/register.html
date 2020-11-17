@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="register.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="store_name">
+      <h1>Local Produce</h1>
+    </div>
+    <!-- Code format from W3schools.com for register page-->
+    <form name="purchaseForm" action="./process_form" method="POST">
+    <div class="container">
+      <h2>Register</h2>
+      <p>Please fill in this form to create an account.</p>
+      <hr />
+      <label for="firstname"><b>First Name</b></label>
+      <input
+        type="text"
+        placeholder="First Name"
+        name="firstname"
+        id="firstmane"
+        required
+      />
+      <label for="lastname"><b>Last Name</b></label>
+      <input
+        type="text"
+        placeholder="Last Name"
+        name="lastname"
+        id="lastname"
+        required
+      />
+      <br />
+      <br />
+      <label for="email"><b>Email</b></label>
+      <input
+        type="text"
+        placeholder="Enter Email"
+        name="email"
+        id="email"
+        required
+      />
+      <br />
+      <br />
+      <label for="Password"><b>Password</b></label>
+      <input
+        type="password"
+        placeholder="Enter Password"
+        name="psw"
+        id="psw"
+        required
+      />
+      <br />
+      <br />
+      <label for="psw-repeat"><b>Repeat Password</b></label>
+      <input
+        type="password"
+        placeholder="Repeat Password"
+        name="psw-repeat"
+        id="psw-repeat"
+        required
+      />
+      <hr />
+      <br />
+      <br />
+
+      <button type="submit" class="registerbtn">Register</button>
+    </div>
+
+    <div class="container signin">
+      <p>Already have an account? <a href="#">Sign in</a>.</p>
+    </div>
+  </body>
+</html>
