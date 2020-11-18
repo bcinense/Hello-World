@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="login.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+  </head>
+  <body>
+    <div id="store_name">
+      <h1>Local Produce</h1>
+    </div>
+        <form name="login_user" action="./login_user" method="POST">
+    <div id="Title"><h2>Login</h2></div>
+    <div class="container">
+        <label for="username"><b>Username</b></label>
+        <input
+          type="text"
+          placeholder="Username"
+          name="username"
+          id="username"
+          required
+        />
+        <br /><br />
+        <label for="password"><b>Password</b></label>
+        <input
+          type="password"
+          placeholder="Password"
+          name="password"
+          id="password"
+          required
+        />
+        <br />
+        <br />
+
+        <script>
+          document.write(
+            `<input type="submit" value='Login' name="login_button">`
+          );
+        </script>
+      </form>
+    </div>
+  </body>
+</html>
