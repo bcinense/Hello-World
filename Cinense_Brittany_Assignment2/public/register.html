@@ -40,8 +40,9 @@
         <label for="username"><b>Username</b></label>
         <input
           type="text"
-          placeholder="Last Name"
+          placeholder="Username"
           name="username"
+          pattern=".{4,10}"
           title="Username must be beteween 4-10 characters long"
           id="username"
           required
@@ -51,6 +52,8 @@
         <input
           type="email"
           placeholder="Enter Email"
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+          title="Please enter a valid email address. ex: johndoe@email.com"
           name="email"
           id="email"
           required
@@ -73,6 +76,8 @@
         <input
           type="password"
           placeholder="Repeat Password"
+          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
+          title="Passwords do not match. Try again."
           name="repeat_password"
           id="repeat_password"
           required

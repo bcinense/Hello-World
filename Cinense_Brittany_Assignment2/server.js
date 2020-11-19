@@ -24,6 +24,7 @@ if (fs.existsSync(filename)) {
   var data = fs.readFileSync(filename, "utf-8"); // When the file is executed it will read the data in the filename
   var users_reg_data = JSON.parse(data); // Parse data, which hold the contents of the objects
 }
+// Code to write username to shopping cart, so in the invoice it can grab current username to thank them
 if (fs.existsSync(shoppingCartFile)) {
   var shoppingCartData = fs.readFileSync(shoppingCartFile, "utf-8");
   var shoppingCart = JSON.parse(shoppingCartData);
@@ -105,6 +106,11 @@ app.post("/register_new", function (request, response) {
         reg_info_str = JSON.stringify(users_reg_data);
         // will read the new data, parse it and read the new user info
         fs.writeFileSync(filename, reg_info_str);
+        // Code to write email to shopping cart, so in the invoice it can grab users email to send invoice
+        var newShoppingCart = shoppingCart;
+        newShoppingCart.email = request.body.email;
+        newShoppingCart.username = username;
+        fs.writeFileSync(shoppingCartFile, JSON.stringify(newShoppingCart));
 
         // Send a response after registering with a link to complete purchase and go to invoice
         response.send(
@@ -112,17 +118,22 @@ app.post("/register_new", function (request, response) {
         );
         return;
       }
+    } else {
+      console.log("Did not pass");
     }
   }
 });
 // Code taken from Lab14 Ex1.js to retrieve username and password from user_data.json file
 app.post("/login_user", function (request, response) {
-  if (typeof users_reg_data[request.body.username] != "undefined") {
-    if (
-      request.body.password == users_reg_data[request.body.username].password
-    ) {
+  var username = request.body.username;
+  if (typeof users_reg_data[username] != "undefined") {
+    if (request.body.password == users_reg_data[username].password) {
+      var newShoppingCart = shoppingCart;
+      newShoppingCart.username = username;
+      newShoppingCart.email = users_reg_data[username].email;
+      fs.writeFileSync(shoppingCartFile, JSON.stringify(newShoppingCart));
       response.send(
-        `Thank you for ${request.body.username} logging in<br>Please <a href="/invoice">click here</a> to complete your purchase`
+        `Thank you for ${username} logging in<br>Please <a href="/invoice">click here</a> to complete your purchase`
       );
     } else {
       response.send(
@@ -130,7 +141,7 @@ app.post("/login_user", function (request, response) {
       );
     }
   } else {
-    response.send(`Sorry! ${request.body.username} does not exist`);
+    response.send(`Sorry! ${username} does not exist`);
   }
 });
 app.get("/invoice", function (request, response) {

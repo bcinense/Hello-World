@@ -1,6 +1,9 @@
   <!-- Invoice template used from Invoice WODS-->
  <table border="2">
       <tbody>
+      <tr>
+      <th style="text-align: center" colspan="4"><span style="font-family: cursive">Local Produce Invoice</th></span>
+      </tr>
         <tr>
           <th style="text-align: center" width="43%">Item</th>
           <th style="text-align: center" width="11%">Quantity</th>
@@ -40,3 +43,4 @@
         </tr>
       </tbody>
     </table>
+      <strong>Thank you for your purchase, ${shoppingCart.username}. <br>A copy of this invoice will also be sent to your email at ${shoppingCart.email} .</strong>
