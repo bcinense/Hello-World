@@ -54,7 +54,6 @@ app.post("/process_form", function (request, response) {
 });
 function validateName(name) {
   if (name.length >= 30) {
-    alert("Sorry full name cannot exceed 30 characters combined!");
     return false;
   }
 }
@@ -106,7 +105,7 @@ app.post("/register_new", function (request, response) {
         reg_info_str = JSON.stringify(users_reg_data);
         // will read the new data, parse it and read the new user info
         fs.writeFileSync(filename, reg_info_str);
-        // Code to write email to shopping cart, so in the invoice it can grab users email to send invoice
+        // Code to write email and username to shopping cart, so in the final invoice it display username and email of current user
         var newShoppingCart = shoppingCart;
         newShoppingCart.email = request.body.email;
         newShoppingCart.username = username;
@@ -118,10 +117,10 @@ app.post("/register_new", function (request, response) {
         );
         return;
       }
-    } else {
-      console.log("Did not pass");
     }
   }
+  // Send to a page with a response to go back if passwords do not match
+  response.send("Passwords do not match, please go back and try again");
 });
 // Code taken from Lab14 Ex1.js to retrieve username and password from user_data.json file
 app.post("/login_user", function (request, response) {
@@ -131,7 +130,7 @@ app.post("/login_user", function (request, response) {
       var newShoppingCart = shoppingCart;
       newShoppingCart.username = username;
       newShoppingCart.email = users_reg_data[username].email;
-      fs.writeFileSync(shoppingCartFile, JSON.stringify(newShoppingCart));
+      fs.writeFileSync(shoppingCartFile, JSON.stringify(newShoppingCart)); // Write information into shopping_cart.json
       response.send(
         `Thank you for ${username} logging in<br>Please <a href="/invoice">click here</a> to complete your purchase`
       );
