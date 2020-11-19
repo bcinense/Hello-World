@@ -3,6 +3,7 @@ var myParser = require("body-parser");
 var data = require("./public/product_data.js");
 var app = express(); //initialize express
 var fs = require("fs");
+const { request } = require("express");
 const filename = "./public/user_data.json";
 const shoppingCartFile = "./public/shopping_cart.json";
 
@@ -50,26 +51,68 @@ app.post("/process_form", function (request, response) {
     response.send(`<p>Sorry, invalid input</p>`);
   }
 });
-// Code taken from Lab14 Ex1.js to register new user in the user_data.json file
+function validateName(name) {
+  if (name.length >= 30) {
+    alert("Sorry full name cannot exceed 30 characters combined!");
+    return false;
+  }
+}
+// Created a function to create criterea for the username, minimum 4 characters and max 10 characters
+function validateUsername(username) {
+  if (
+    !users_reg_data[username] &&
+    username.length >= 4 &&
+    username.length <= 10
+  ) {
+    return true;
+  } else {
+    return false;
+  }
+}
+// Created a function to check that password and confirm password will be the same in order to continue registering
+function validatePassword(password, repeat_password) {
+  if (password === repeat_password) {
+    return true;
+  } else {
+    return false;
+  }
+}
+// Created a function to create criterea for the email
+function validateEmail(email) {
+  var emailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  // Format validation used from w3resource.com
+  if (email.match(emailformat)) {
+    return true;
+  } else {
+    return false;
+  }
+}
 
+// Code taken from Lab14 Ex1.js to register new user in the user_data.json file
 app.post("/register_new", function (request, response) {
   var username = request.body.username;
-  users_reg_data[username] = {}; //leave blank
-  users_reg_data[username].password = request.body.password;
-  users_reg_data[username].email = request.body.email;
-  // Grab both first and last name and put together for the object name
-  users_reg_data[
-    username
-  ].name = `${request.body.firstname} ${request.body.lastname}`;
-  // write updated object to user_reg_info
-  reg_info_str = JSON.stringify(users_reg_data);
-  // will read the new data, parse it and read the new user info
-  fs.writeFileSync(filename, reg_info_str);
-  {
-    // Send a response after registering with a link to complete purchase and go to invoice
-    response.send(
-      `Thank you ${request.body.username} registering!<br>Please <a href="/invoice">click here</a> to complete your purchase`
-    );
+  if (validateUsername(username)) {
+    users_reg_data[username] = {}; //leave blank
+    if (validatePassword(request.body.password, request.body.repeat_password)) {
+      users_reg_data[username].password = request.body.password;
+      if (validateEmail(request.body.email)) {
+        users_reg_data[username].email = request.body.email;
+        // Grab both first and last name and put together for the object name
+        users_reg_data[
+          username
+        ].name = `${request.body.firstname} ${request.body.lastname}`;
+        // write updated object to user_reg_info
+        reg_info_str = JSON.stringify(users_reg_data);
+        // will read the new data, parse it and read the new user info
+        fs.writeFileSync(filename, reg_info_str);
+
+        // Send a response after registering with a link to complete purchase and go to invoice
+        response.send(
+          `Thank you ${request.body.username} registering!<br>Please <a href="/invoice">click here</a> to complete your purchase`
+        );
+        return;
+      }
+    }
   }
 });
 // Code taken from Lab14 Ex1.js to retrieve username and password from user_data.json file

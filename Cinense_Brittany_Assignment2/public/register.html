@@ -24,7 +24,7 @@
           type="text"
           placeholder="First Name"
           name="firstname"
-          id="firstmane"
+          id="firstname"
           required
         />
         <label for="lastname"><b>Last Name</b></label>
@@ -42,13 +42,14 @@
           type="text"
           placeholder="Last Name"
           name="username"
+          title="Username must be beteween 4-10 characters long"
           id="username"
           required
         />
         <br /><br />
         <label for="email"><b>Email</b></label>
         <input
-          type="text"
+          type="email"
           placeholder="Enter Email"
           name="email"
           id="email"
@@ -60,18 +61,20 @@
         <input
           type="password"
           placeholder="Enter Password"
+          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
+          title="Must contain at least one number and one uppercase and lowercase letter, and at least 6 or more characters"
           name="password"
           id="password"
           required
         />
         <br />
         <br />
-        <label for="psw-repeat"><b>Repeat Password</b></label>
+        <label for="repeat_password"><b>Repeat Password</b></label>
         <input
           type="password"
           placeholder="Repeat Password"
-          name="password-repeat"
-          id="password-repeat"
+          name="repeat_password"
+          id="repeat_password"
           required
         />
         <hr />

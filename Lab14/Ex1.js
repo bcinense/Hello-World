@@ -43,7 +43,7 @@ app.post("/register", function (request, response) {
   // process a simple register form
   // validate the reg info
 
-  // If all data is valid write to the user_datat_filename and send to invoice
+  // If all data is valid write to the user_data_filename and send to invoice
 
   // add an ex. new user reg info
   username = request.body.username; // use this for assignment to replace newuser with what the user typed in
