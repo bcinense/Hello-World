@@ -123,6 +123,7 @@ app.post("/register_new", function (request, response) {
   response.send("Passwords do not match, please go back and try again");
 });
 // Code taken from Lab14 Ex1.js to retrieve username and password from user_data.json file
+//  For existing user to log in and take shopping cart with them to final invoice
 app.post("/login_user", function (request, response) {
   var username = request.body.username;
   if (typeof users_reg_data[username] != "undefined") {
