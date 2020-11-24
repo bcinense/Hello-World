@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Link stylesheet -->
+    <link rel="stylesheet" type="text/css" href="index.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Link to the product_data.js file to pull data from (uses GET request) -->
+    <script src="./product_data.js" type="text/javascript"></script>
+    <title>FarmFresh</title>
+    <!-- Created top navigationbar for login and cart on homepage -->
+    <ul class="topnavbar">
+      <li><img src="./icons/iconlogin.png" class="loginIcon"><a href="#Login">Log In</a></li></img>
+      <li><img src="./icons/bag.png" class = "cartIcon"><a href="#Cart">Cart</a></li></img>
+    </ul>
+    <br />
+    <br />
+  </head>
+  <div class="title">
+    <h1>Farm<br />Fresh</h1>
+  </div>
+  <body>
+    <h2>Shop</h2>
+        <form name="purchaseForm" action="./process_form" method="POST">
+          <script>
+            //For loop used to output images from product_data.js file
+            for (i = 0; i < product_data.length; i++) {
+              document.write(`
+             
+                <div id = imageContainer>
+                <img src="${product_data[i].image}">
+                <h3>${product_data[i].veggie}</h3>
+                <p>$${product_data[i].price.toFixed(2) + "/lb"
+                }</p>
+                <label for="quantity">Quantity</label>
+                <input type="number" id="quantity" name="quantity" min="1" max="10"
+                ${product_data[i].veggie}">
+                </div>`);
+            }
+          </script>
+  </body>
+  <footer>
+<!-- // Render submit Purchase button -->
+    <script> document.write(
+      `<input type="submit" value='Add To Cart' id = "addToCart" name="addToCart_button">`
+    );</script></footer>
+</html>
