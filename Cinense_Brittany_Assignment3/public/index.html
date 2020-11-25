@@ -23,7 +23,8 @@
     <h2>Shop</h2>
         <form name="purchaseForm" action="./process_form" method="POST">
           <script>
-            //For loop used to output images from product_data.js file
+            //For loop used to output images from product_data.js file, 
+            // For loop code used from SmartPhoneProducts3 to display each product
             for (i = 0; i < product_data.length; i++) {
               document.write(`
              
@@ -43,7 +44,7 @@
   <br>
   <br>
   <br>
-<!-- // Render submit Purchase button -->
+<!-- // Render submit addToCart button -->
     <script> document.write(
       `<input type="submit" value='Add To Cart' id = "addToCart" name="addToCart_button">`
     );</script></footer>
