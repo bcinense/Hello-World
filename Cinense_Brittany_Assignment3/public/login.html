@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="login.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login or Register</title>
+</head>
+<body>
+    <div class="title">
+        <h1>Farm<br>Fresh</h1>
+    </div>
+    <form name="login_or_reg_user" action="./login_or_reg_user" method="POST">
+
+    <h2>Customer Login</h2>
+
+        <!-- Div class = "float container" to put two div's side-by-side code from https://coder-coder.com/display-divs-side-by-side/ -->
+        <div class="flex-container">
+            <div class="flex-child existing_user"><div id = "existing_user">Existing Customers</div><br>
+                        <label for="username"><b>Username</b></label><br>
+                        <input type="text" size = "50" placeholder="Username" name="username" class="username" required />
+                        <br /><br />
+                        <label for="password"><b>Password</b></label><br>
+                        <input type="password" size = "50" placeholder="Password" name="password" class="password" required /><br><br>
+                        <script>document.write(`<input type="submit" value='Log In' id="loginButton" name="login_button">`);
+                        </script>
+                        </div>
+            <div class="flex-child register_user"><div id="new_user">New Customers</div><br>
+                        <label for="firstname"><b>First Name</b></label><br>
+                        <input type="text" size = "50" placeholder="First Name" name="firstname" class="firstname" required />
+                        <br /><br />
+                        <label for="lastname"><b>Last Name</b></label><br>
+                        <input type="text" size="50" placeholder="Last Name" name="lastname" class="lastname" required />
+                        <br /><br />
+                        <label for="email"><b>Email</b></label><br>
+                        <input type="text" size="50" placeholder="Email" name="email" class="email" required />
+                        <br /><br />
+                        <label for="password"><b>Password</b></label><br>
+                        <input type="password" size = "50" placeholder="Password" name="password" class="password" required /><br><br>
+                        <script>document.write(`<input type="submit" value='Register' id= "registerButton" name="register_button">`);
+                         </script>
+                        </div>
+                        </div>
+            <br />
+            <br />
+
+    </form>
+    </div>
+</body>
+
+</html>
