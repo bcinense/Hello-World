@@ -32,14 +32,17 @@
                 <h3>${product_data[i].veggie}</h3>
                 <p>$${product_data[i].price.toFixed(2) + "/lb"
                 }</p>
-                <label for="quantity">Quantity</label>
+                <label for="quantity">Quantity
                 <input type="number" id="quantity" name="quantity" min="1" max="10"
-                ${product_data[i].veggie}">
+                ${product_data[i].veggie}">/lb</label>
                 </div>`);
             }
           </script>
   </body>
   <footer>
+  <br>
+  <br>
+  <br>
 <!-- // Render submit Purchase button -->
     <script> document.write(
       `<input type="submit" value='Add To Cart' id = "addToCart" name="addToCart_button">`
