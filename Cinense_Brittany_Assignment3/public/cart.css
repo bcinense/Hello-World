@@ -37,3 +37,15 @@ input#purchaseButton {
   color: #ffffff;
   font-family: sans-serif;
 }
+.remove-product {
+  border: 0;
+  padding: 4px 8px;
+  background-color: #c66;
+  color: #fff;
+  font-family: sans serif;
+  font-size: 12px;
+  border-radius: 3px;
+}
+.remove-product:hover {
+  background-color: #a44;
+}

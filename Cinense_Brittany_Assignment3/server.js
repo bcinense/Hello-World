@@ -26,3 +26,4 @@ if (fs.existsSync(userInfo)) {
 app.post("/login_or_reg_user", function (request, response) {
   response.send("You did it!");
 });
+//Figure out how to click only on one button login or register (if statment.)
