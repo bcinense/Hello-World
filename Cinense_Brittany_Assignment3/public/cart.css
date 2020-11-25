@@ -14,47 +14,21 @@ h2 {
   font-weight: lighter;
   font-family: sans-serif;
 }
-.comment {
-  text-align: center;
-}
-#existing_user,
-#new_user {
-  font-size: 25px;
-  font-weight: lighter;
-  font-family: sans-serif;
-  text-align: left;
-  border-bottom: 1px solid black;
-}
 .flex-container {
   display: flex;
-}
-label {
-  font-size: 20px;
-  font-family: sans-serif;
+  text-align: center;
 }
 .flex-child {
   flex: 1;
   display: inline-flexbox;
 }
-
-.flex-child:first-child {
-  margin-right: 100px;
-}
-.password,
-.username,
-.firstname,
-.lastname,
-.email {
-  padding: 12px 20px;
-}
-input#registerButton,
-input#loginButton {
+input#purchaseButton {
+  float: right;
   outline: none;
-  width: 400px;
+  width: 235px;
   text-align: center;
-  font-size: 28px;
+  font-size: 25px;
   cursor: pointer;
-  display: inline-block;
   box-sizing: border-box;
   display: flex;
   align-self: center;

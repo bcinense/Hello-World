@@ -13,6 +13,7 @@
     <form name="login_or_reg_user" action="./login_or_reg_user" method="POST">
 
     <h2>Customer Login</h2>
+    <div class = "comment">To complete your purchase log in or register.</div><br>
 
         <!-- Div class = "float container" to put two div's side-by-side code from https://coder-coder.com/display-divs-side-by-side/ -->
         <div class="flex-container">
@@ -22,6 +23,7 @@
                         <br /><br />
                         <label for="password"><b>Password</b></label><br>
                         <input type="password" size = "50" placeholder="Password" name="password" class="password" required /><br><br>
+                        <!-- // Render submit Login button -->
                         <script>document.write(`<input type="submit" value='Log In' id ="loginButton" name="do_login">`);
                         </script>
                         </div>
@@ -37,6 +39,7 @@
                         <br /><br />
                         <label for="password"><b>Password</b></label><br>
                         <input type="password" size = "50" placeholder="Password" name="password" class="password" required /><br><br>
+                        <!-- // Render submit register button -->
                         <script>document.write(`<input type="submit" value='Register' id = "registerButton" name="do_register">`);
                          </script>
                         </div>
