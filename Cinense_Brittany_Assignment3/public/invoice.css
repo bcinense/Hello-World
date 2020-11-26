@@ -1,7 +1,35 @@
-.container {
-  border-style: dotted;
-  text-align: center;
-}
 h1 {
-  color: red;
+  color: black;
+  font-family: sans-serif;
+}
+.receiptgreeting {
+  text-align: center;
+  font-family: sans-serif;
+  color: aliceblue;
+  font-size: 20px;
+}
+#invoiceTables {
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 25px;
+  background: url(https://image.freepik.com/free-photo/watercolor-paper-texture-background_24972-509.jpg);
+  background-position: left top;
+  background-repeat: repeat;
+  padding: 20px;
+  width: 200px;
+  height: 150px;
+  font-family: sans-serif;
+}
+#invoiceTables th,
+#invoiceTables td {
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 25px;
+}
+body {
+  background-size: cover;
+  background-image: url(https://image.freepik.com/free-photo/paper-bag-with-various-groceries-dark-concrete-background_74580-2053.jpg);
+}
+.time {
+  font-family: sans-serif;
 }
