@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Link stylesheet -->
+    <link rel="stylesheet" href="products-style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Link to the product_data.js file to pull data from (uses GET request) -->
+    <script src="./product_data.js" type="text/javascript"></script>
+    <title>Farm Fresh</title>
+  </head>
+  <div class="title">
+    <h1>Farm<br />Fresh</h1>
+  </div>
+  <body>
+    <h2>Shop</h2>
+    <form name="purchaseForm" action="./process_form" method="POST">
+      <script>
+        //For loop used to output images from product_data.js file
+        // For loop code used from SmartPhoneProducts3 to display each product
+        for (i = 0; i < product_data.length; i++) {
+          document.write(`
+        <div id = imageContainer>
+        <h2>${product_data[i].veggie}</h2>
+        <img src="${product_data[i].image}">
+        <p>Price: $${product_data[i].price.toFixed(2) + "/lb"}</p>
+          <input type="text" placeholder="Enter Quantity Here!" name="${
+            product_data[i].veggie
+          }"/lb >
+        </div>`);
+        } // Render submit addToCart button
+        document.write(
+          `<input type="submit" value='Purchase' name="purchase_submit_button">`
+        );
+      </script>
+    </form>
+  </body>
+  <footer>
+    <script></script>
+  </footer>
+</html>

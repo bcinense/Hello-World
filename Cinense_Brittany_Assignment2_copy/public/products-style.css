@@ -1,0 +1,77 @@
+/* Set Background Color */
+body {
+  background-color: #e6ffe5;
+  font-family: sans-serif;
+}
+.title {
+  text-align: center;
+  font-family: sans-serif;
+  color: black;
+  font-size: 22px;
+}
+h2 {
+  text-align: center;
+  border-top-style: double;
+  border-bottom-color: #404040;
+  border-top-color: #404040;
+  border-bottom-style: double;
+  font-size: 25px;
+  font-weight: lighter;
+  font-family: sans-serif;
+}
+/* // Place border around each product */
+#display_products {
+  border-style: solid;
+  border-color: 1px black;
+  display: inline-block;
+}
+h3 {
+  font-family: sans-serif;
+}
+
+p {
+  font-family: sans-serif;
+}
+img {
+  width: 155px;
+  height: 155px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+#imageContainer {
+  text-align: center;
+  display: inline-block;
+  box-sizing: content-box;
+  width: 350px;
+  height: 350px;
+  border: 2px solid #404040;
+  margin-left: 82px;
+  margin-right: auto;
+  margin-bottom: 25px;
+}
+input#Purchase {
+  text-align: center;
+  font-size: 24px;
+  cursor: pointer;
+  display: inline-block;
+  box-sizing: border-box;
+  display: flex;
+  align-self: center;
+  background-color: #1f214a;
+  text-shadow: 0 1px rgba(0, 0, 0, 0.1);
+  color: #ffffff;
+}
+input#quantity {
+  width: 35px;
+  padding-left: 6px;
+  padding-right: 0;
+  height: 35px;
+  min-height: 35px;
+  font-family: sans-serif;
+}
+footer {
+  display: flex;
+  justify-content: center;
+  font-family: sans-serif;
+}

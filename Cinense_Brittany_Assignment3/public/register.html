@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="register.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+  </head>
+  <body>
+    <div class="title">
+      <h1>Farm<br />Fresh</h1>
+    </div>
+
+    <form name="register_user" action="./register_user" method="POST">
+      <h2>Register</h2>
+      <div class="flex-child register_user">
+        <div id="new_user">New Customers</div>
+        <br />
+        <label for="firstname"><b>First Name</b></label
+        ><br />
+        <input
+          type="text"
+          size="50"
+          placeholder="First Name"
+          name="firstname"
+          class="firstname"
+          required
+        />
+        <br /><br />
+        <label for="lastname"><b>Last Name</b></label
+        ><br />
+        <input
+          type="text"
+          size="50"
+          placeholder="Last Name"
+          name="lastname"
+          class="lastname"
+          required
+        />
+        <br /><br />
+        <label for="email"><b>Email</b></label
+        ><br />
+        <input
+          type="text"
+          size="50"
+          placeholder="Email"
+          name="email"
+          class="email"
+          required
+        />
+        <br /><br />
+        <label for="password"><b>Password</b></label
+        ><br />
+        <input
+          type="password"
+          size="50"
+          placeholder="Password"
+          name="password"
+          class="password"
+          required
+        /><br /><br />
+        <!-- // Render submit register button -->
+        <script>
+          document.write(
+            `<input type="submit" value='Register' id = "registerButton" name="do_register">`
+          );
+        </script>
+      </div>
+    </form>
+  </body>
+  <footer>
+    <div class="container login">
+      <p>Already have an account? <a href="login.html">Login Here</a></p>
+    </div>
+  </footer>
+</html>

@@ -21,7 +21,7 @@
   </div>
   <body>
     <h2>Shop</h2>
-        <form name="purchaseForm" action="./process_form" method="POST">
+        <form name="cart" action="./process_cart" method="POST">
           <script>
             //For loop used to output images from product_data.js file, 
             // For loop code used from SmartPhoneProducts3 to display each product
@@ -34,7 +34,7 @@
                 <p>$${product_data[i].price.toFixed(2) + "/lb"
                 }</p>
                 <label for="quantity">Quantity
-                <input type="number" id="quantity" name="quantity" min="1" max="10"
+                <input type="number" id="quantity" name="${product_data[i].veggie}" min="1" max="10"
                 ${product_data[i].veggie}">/lb</label>
                 </div>`);
             }
@@ -48,4 +48,5 @@
     <script> document.write(
       `<input type="submit" value='Add To Cart' id = "addToCart" name="addToCart_button">`
     );</script></footer>
+    </form>
 </html>

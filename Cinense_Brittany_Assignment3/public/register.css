@@ -1,0 +1,54 @@
+.title {
+  text-align: center;
+  font-family: sans-serif;
+  color: black;
+  font-size: 22px;
+}
+h2 {
+  text-align: center;
+  border-top-style: double;
+  border-bottom-color: #404040;
+  border-top-color: #404040;
+  border-bottom-style: double;
+  font-size: 25px;
+  font-weight: lighter;
+  font-family: sans-serif;
+}
+
+#new_user {
+  text-align: center;
+  font-size: 25px;
+  font-weight: lighter;
+  font-family: sans-serif;
+  border-bottom: 1px solid black;
+}
+label {
+  text-align: center;
+  font-size: 20px;
+  font-family: sans-serif;
+}
+input#registerButton {
+  outline: none;
+  width: 400px;
+  text-align: center;
+  font-size: 28px;
+  cursor: pointer;
+  display: inline-block;
+  box-sizing: border-box;
+  background-color: #1f214a;
+  text-shadow: 0 1px rgba(0, 0, 0, 0.1);
+  color: #ffffff;
+  font-family: sans-serif;
+  margin: 0 auto;
+}
+.password,
+.username,
+.firstname,
+.lastname,
+.email {
+  padding: 12px 20px;
+}
+.flex-child:first-child {
+  text-align: center;
+  display: block;
+}
