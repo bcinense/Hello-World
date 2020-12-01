@@ -4,16 +4,17 @@
     <link rel="stylesheet" href="login.css" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login Page</title>
+    <title>Login</title>
   </head>
   <body>
-    <div id="store_name">
-      <h1>Local Produce</h1>
+    <div class="title">
+      <h1>Farm<br>Fresh</h1>
     </div>
         <form name="login_user" action="./login_user" method="POST">
-    <div id="Title"><h2>Login</h2></div>
+<h2>Customer Login</h2>
+<div class = "comment">To complete your purchase log in or register.</div>
     <div class="container">
-        <label for="username"><b>Username</b></label>
+        <label for="username"><b>Username</b></label><br /><br />
         <input
           type="text"
           placeholder="Username"
@@ -22,7 +23,7 @@
           required
         />
         <br /><br />
-        <label for="password"><b>Password</b></label>
+        <label for="password"><b>Password</b></label><br /><br />
         <input
           type="password"
           placeholder="Password"
@@ -35,7 +36,7 @@
 
         <script>
           document.write(
-            `<input type="submit" value='Login' name="login_button">`
+            `<input type="submit" value='Login' id = "loginButton" name="login_button">`
           );
         </script>
       </form>
