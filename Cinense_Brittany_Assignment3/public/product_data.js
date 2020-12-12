@@ -30,6 +30,3 @@ product_data = [
     image: "./images/lettuce.jpeg",
   },
 ];
-if (typeof module != undefined) {
-  module.exports.product_data = product_data;
-}
