@@ -55,8 +55,6 @@ app.post("/login_user", function (request, response) {
   }
 });
 
-//Figure out how to click only on one button login or register (if statment.)
-
 // Function from Lab12
 function isNonNegInt(q, returnErrors = false) {
   errors = []; // assume no errors at first

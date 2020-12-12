@@ -124,6 +124,9 @@ footer {
   text-align: center;
   font-size: 25px;
 }
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
 
 .dropdown a:hover {
   background-color: #ddd;
@@ -131,4 +134,8 @@ footer {
 
 .show {
   display: block;
+}
+.dropbtn:hover,
+.dropbtn:focus {
+  background-color: #ddd;
 }
