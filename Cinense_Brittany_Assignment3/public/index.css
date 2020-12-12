@@ -114,7 +114,6 @@ footer {
   display: none;
   position: relative;
   min-width: 160px;
-  overflow: auto;
   z-index: 1;
   text-align: center;
 }
