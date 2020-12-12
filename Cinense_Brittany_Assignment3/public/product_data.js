@@ -9,24 +9,56 @@ product_data = [
     price: 0.25,
     image: "./images/mushroom.jpg",
   },
-  {
-    veggie: "Carrots",
-    price: 0.16,
-    image: "./images/carrots.png",
-  },
+
   {
     veggie: "Onion",
     price: 1.3,
     image: "./images/onion.jpg",
   },
   {
-    veggie: "Tomatoes",
+    veggie: "Cherry Tomatoes",
     price: 0.75,
     image: "./images/tomato.jpeg",
   },
+
   {
-    veggie: "Lettuce",
+    veggie: "Roma Tomato",
     price: 1.57,
-    image: "./images/lettuce.jpeg",
+    image: "./images/romatomato.png",
+  },
+  {
+    veggie: "Yellow Tomatoes",
+    price: 1.57,
+    image: "./images/yellowtomatoes.png",
+  },
+  {
+    veggie: "Portobello Mushrooms",
+    price: 1.57,
+    image: "./images/portobello.png",
+  },
+  {
+    veggie: "Enoki Mushrooms",
+    price: 1.57,
+    image: "./images/enoki.png",
+  },
+  {
+    veggie: "Red Potatoes",
+    price: 1.57,
+    image: "./images/redpotatoes.png",
+  },
+  {
+    veggie: "Sweet Potatoes",
+    price: 1.57,
+    image: "./images/purplepotatoes.png",
+  },
+  {
+    veggie: "Red Onions",
+    price: 1.57,
+    image: "./images/redonions.png",
+  },
+  {
+    veggie: "White Onions",
+    price: 1.57,
+    image: "./images/whiteonions.png",
   },
 ];
