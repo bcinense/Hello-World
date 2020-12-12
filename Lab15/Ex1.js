@@ -8,6 +8,11 @@ const filename = "user_data.json";
 var cookieParser = require("cookie-parser");
 app.use(cookieParser()); //Reads and gets the cookie
 
+
+var session = require('express-session'); 
+
+app.use(session({secret: "ITM352 rocks!"})); // Sets up a session and encrypt it with the secret. Session based on the IP address.
+
 // Check if file exists before reading
 if (fs.existsSync(filename)) {
   var stats = fs.statSync(filename);
@@ -25,10 +30,19 @@ if (fs.existsSync(filename)) {
 
 app.use(myParser.urlencoded({ extended: true }));
 
+// If session.id is defined send the session.id back as a response
+app.get("/use_session", function (request, response){
+if (typeof request.session.id != "undefined"){
+  response.send(`welcome, your session ID is ${request.session.id}`)
+}
+});
+
+
+
 // Set path to GET set_cookie
 app.get("/set_cookie", function (request, response) {
   // Set cookie property to 'myname' with the value Dan
-  response.cookie('myname','Dan')
+  response.cookie('myname','Dan', {maxAge : 5* 1000}) // maxAge is to set the cookie to expire in 5 seconds
   response.send('Cookie sent!')
 },
 
@@ -38,7 +52,7 @@ thename = 'ANONYMOUS'
 if (typeof request.cookies['myname'] != 'undefined'){
   thename = request.cookies['myname']
 }
-response.send('Welcome to the Use Cookie page <your name> ')
+response.send(`Welcome to the Use Cookie page ${thename} `)
 },
 
 
@@ -90,24 +104,37 @@ app.get("/login", function (request, response) {
   response.send(str);
 });
 
-app.post("/login", function (request, response) {
+app.post("/process_login", function (request, response) {
   // Process login form POST and redirect to logged in page if ok, back to login page if not
   console.log(request.body);
 });
-
-app.listen(8080, () => console.log(`listening on port 8080`));
-
-// // if user exists, get their password
-// if (typeof users_reg_data[request.body.username] != "undefined") {
-//   if (request.body.password == users_reg_data[request.body.username].password) {
-//     response.send(`Thank you for ${request.body.username} logging in`);
-//   } else {
-//     response.send(
-//       `Hey! ${request.body.password} does not match what we have for you`
-//     );
-//   }
-// } else {
-//   response.send(`Hey! ${request.body.username} does not exist`);
-// }
+// app.listen(8080, () => console.log(`listening on port 8080`));
+// if user exists, get their password
+if (typeof users_reg_data[request.body.username] != "undefined") {
+  if (request.body.password == users_reg_data[request.body.username].password) {
+    response.send(`Thank you for ${request.body.username} logging in`);
+ response.cookie('username', request.body.username,{maxAge: 10*1000})
+  } else {
+    response.send(
+      `Hey! ${request.body.password} does not match what we have for you`
+    );
+  }
+} else {
+  response.send(`Hey! ${request.body.username} does not exist`);
+}
 
 //validate email check on the server!!
+
+var today = new Date();
+request.session.lastLogin = now.toDateString;
+if (typeof request.session.lastLogin != 'undefined'){
+  lastLogin = request.session.lastLogin;
+}
+
+if(request.cookies.username ){
+  welcome_str = request.cookies.username;
+}else {
+  welcome_str = 'IDK' 
+}
+<body>
+Welcome back ${welcome_str}
