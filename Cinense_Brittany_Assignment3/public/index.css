@@ -146,3 +146,10 @@ h3 {
   color: black;
   font-size: 16px;
 }
+.copyright {
+  background: #ddd;
+  color: black;
+  font-size: 16px;
+  text-align: center;
+  padding: 20px 2px;
+}
