@@ -63,3 +63,31 @@ input#loginButton {
   color: #ffffff;
   font-family: sans-serif;
 }
+a:link {
+  color: black;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  color: black;
+  text-decoration: underline;
+}
+a:visited {
+  color: black;
+  background-color: transparent;
+  text-decoration: none;
+}
+a.registerlink {
+  color: blue;
+  background-color: transparent;
+  text-decoration: none;
+}
+a.registerlink:visited {
+  color: #551a8b;
+  background-color: transparent;
+  text-decoration: none;
+}
+a.registerlink:hover {
+  text-decoration: underline;
+}

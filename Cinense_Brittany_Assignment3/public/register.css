@@ -16,7 +16,7 @@ h2 {
 }
 
 #new_user {
-  text-align: center;
+  text-align: left;
   font-size: 25px;
   font-weight: lighter;
   font-family: sans-serif;
@@ -51,4 +51,32 @@ input#registerButton {
 .flex-child:first-child {
   text-align: center;
   display: block;
+}
+a:link {
+  color: black;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  color: black;
+  text-decoration: underline;
+}
+a:visited {
+  color: black;
+  background-color: transparent;
+  text-decoration: none;
+}
+a.loginlink {
+  color: blue;
+  background-color: transparent;
+  text-decoration: none;
+}
+a.loginlink:visited {
+  color: #551a8b;
+  background-color: transparent;
+  text-decoration: none;
+}
+a.loginlink:hover {
+  text-decoration: underline;
 }
