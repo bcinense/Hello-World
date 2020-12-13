@@ -22,7 +22,11 @@
           <tr>
             <th style="text-align: center" colspan="4">
               <h1>Farm<br />Fresh</h1>
-   <div class="time">  Date&Time</div>
+
+    <!-- Display real-time stamp of invoice, modified code from W3schools.com for toDateString() -->
+   <div class="time"> <script>
+   var dateNow = new Date();
+   document.write(document.getElementsByClassName("time").innerHTML = dateNow.toDateString())</script></div>
 <p>
           </tr></th>
           <tr>
