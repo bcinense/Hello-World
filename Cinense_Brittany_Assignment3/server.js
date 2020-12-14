@@ -71,7 +71,7 @@ app.post("/process_cart", function (request, response) {
   var isValid = true;
   // Go through each product and validate that it is a number higher than 0
   products.forEach(function (product) {
-    var quantityPurchased = POST[product.veggie];
+    var quantityPurchased = POST[product.name];
     if (!isNonNegInt(quantityPurchased)) {
       isValid = false;
     }

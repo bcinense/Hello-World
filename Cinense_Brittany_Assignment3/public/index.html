@@ -44,12 +44,12 @@
              
                 <div id = imageContainer>
                 <img src="${product_data[i].image}">
-                <h3>${product_data[i].veggie}</h3>
+                <h3>${product_data[i].name}</h3>
                 <p>$${product_data[i].price.toFixed(2) + "/lb"
                 }</p>
                 <label for="quantity">Quantity
-                <input type="number" id="quantity" name="${product_data[i].veggie}" min="1" max="10"
-                ${product_data[i].veggie}">/lb</label>
+                <input type="number" id="quantity" name="${product_data[i].name}" min="1" max="10"
+                ${product_data[i].name}">/lb</label>
                 </div>`);
             }
           </script>
