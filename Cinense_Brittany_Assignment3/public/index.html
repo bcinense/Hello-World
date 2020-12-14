@@ -37,11 +37,14 @@
     </div>
         <form name="cart" action="./process_cart" method="POST">
           <script>
+            // Modified code from url "https://developer.mozilla.org/en-US/docs/Web/API/URL/searchParams"
+            // to parse out the type of each product from the navbar.
             var params = (new URL(document.location)).searchParams;
             var type = params.get('type');
             //For loop used to output images from product_data.js file, 
             // For loop code used from SmartPhoneProducts3 to display each product
             for (i = 0; i < product_data.length; i++) {
+              // Statement to filter navigation bar, if no type is selected show all
               if(type === product_data[i].type || !type){
                               document.write(`
                 <div id = imageContainer>
