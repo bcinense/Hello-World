@@ -28,29 +28,32 @@
     <div class="dropdown">
       <button onclick="shopDropdown()" class="dropbtn">Shop<i class="material-icons">expand_more</i></button>
       </h2> <div id="myDropdown" class="dropdown-content">
-        <a href="#home">All</a>
-        <a href="#about">Onions</a>
-        <a href="#contact">Mushrooms</a>
-        <a href="#contact">Potatoes</a>
-        <a href="#contact">Tomatoes</a>
+        <a href="/">All</a>
+        <a href="/?type=onion">Onions</a>
+        <a href="/?type=mushroom">Mushrooms</a>
+        <a href="/?type=potato">Potatoes</a>
+        <a href="/?type=tomato">Tomatoes</a>
       </div>
     </div>
         <form name="cart" action="./process_cart" method="POST">
           <script>
+            var params = (new URL(document.location)).searchParams;
+            var type = params.get('type');
             //For loop used to output images from product_data.js file, 
             // For loop code used from SmartPhoneProducts3 to display each product
             for (i = 0; i < product_data.length; i++) {
-              document.write(`
-             
+              if(type === product_data[i].type || !type){
+                              document.write(`
                 <div id = imageContainer>
                 <img src="${product_data[i].image}">
                 <h3>${product_data[i].name}</h3>
                 <p>$${product_data[i].price.toFixed(2) + "/lb"
-                }</p>
+                  }</p>
                 <label for="quantity">Quantity
                 <input type="number" id="quantity" name="${product_data[i].name}" min="1" max="10"
                 ${product_data[i].name}">/lb</label>
                 </div>`);
+              }
             }
           </script>
 
