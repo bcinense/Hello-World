@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Link stylesheet -->
+    <link rel="stylesheet" type="text/css" href="../public/index.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FarmFresh</title>
+    <!-- Created top navigationbar for login and cart on homepage -->
+    <ul class="topnavbar">
+        <li><a href="./login.html"><img src="./icons/iconlogin.png" class="loginIcon">Login/Register</a></li></img>
+        <li><a href="#Cart"><img src="./icons/bag.png" class="cartIcon">Cart</a></li></img>
+    </ul>
+    <br />
+    <br />
+</head>
+<div class="title">
+    <h1>Farm<br />Fresh</h1>
+</div>
+
+<body>
+    <h3>Enjoy local produce from local farms all around Oahu!</h3>
+    <h2>
+        <!-- Modified code for drop-down feature from W3schools.com, 
+      reference link: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_js_dropdown -->
+        <div class="dropdown">
+            <button onclick="shopDropdown()" class="dropbtn">Shop<i class="material-icons">expand_more</i></button>
+    </h2>
+    <div id="myDropdown" class="dropdown-content">
+        <a href="/">All</a>
+        <a href="/?type=onion">Onions</a>
+        <a href="/?type=mushroom">Mushrooms</a>
+        <a href="/?type=potato">Potatoes</a>
+        <a href="/?type=tomato">Tomatoes</a>
+    </div>
+    </div>
+    <form name="cart" action="./process_cart" method="POST">
+        <script>
+            // Modified code from url "https://developer.mozilla.org/en-US/docs/Web/API/URL/searchParams"
+            // to parse out the type of each product from the navbar.
+            var params = (new URL(document.location)).searchParams;
+            var type = params.get('type');
+            //For loop used to output images from product_data.js file, 
+            // For loop code used from SmartPhoneProducts3 to display each product
+            for (i = 0; i < product_data.length; i++) {
+                // Statement to filter navigation bar, if no type is selected show all
+                if (type === product_data[i].type || !type) {
+                    document.write(`
+                <div id = imageContainer>
+                <img src="${product_data[i].image}">
+                <h3>${product_data[i].name}</h3>
+                <p>$${product_data[i].price.toFixed(2) + "/lb"
+                        }</p>
+                <label for="quantity">Quantity
+                <input type="number" id="quantity" name="${product_data[i].name}" min="1" max="10"
+                ${product_data[i].name}">/lb</label>
+                </div>`);
+                }
+            }
+        </script>
+
+        <!-- Modified code for drop-down feature from W3schools.com, 
+   reference link: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_js_dropdown -->
+        <script>
+            /* When the user clicks on the button, 
+            toggle between hiding and showing the dropdown content */
+            function shopDropdown() {
+                document.getElementById("myDropdown").classList.toggle("show");
+            }
+
+            // Close the dropdown if the user clicks outside of it
+            window.onclick = function (event) {
+                if (!event.target.matches('.dropbtn')) {
+                    var dropdowns = document.getElementsByClassName("dropdown-content");
+                    var i;
+                    for (i = 0; i < dropdowns.length; i++) {
+                        var openDropdown = dropdowns[i];
+                        if (openDropdown.classList.contains('show')) {
+                            openDropdown.classList.remove('show');
+                        }
+                    }
+                }
+            }
+        </script>
+</body>
+<footer>
+    <br>
+    <br>
+    <br>
+    <!-- // Render submit addToCart button -->
+    <script> document.write(
+            `<input type="submit" value='Add To Cart' id = "addToCart" name="addToCart_button">`
+        );</script>
+</footer>
+</form>
+<div class="copyright"> &#169 2020 Farm Fresh, Inc. All Rights Reserved.</div>
+
+</html>

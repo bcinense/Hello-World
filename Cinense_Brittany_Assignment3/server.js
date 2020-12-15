@@ -3,13 +3,19 @@ var myParser = require("body-parser"); // Run body-parser
 var data = require("./public/product_data.js"); // Import and run product_data.js from the public folder
 var app = express(); // Initialize express
 var fs = require("fs"); // Require the File System module
-const { request } = require("express");
+var cookieParser = require("cookie-parser");
+var session = require("express-session");
+const { nextTick, ppid } = require("process");
+app.use(cookieParser());
+app.use(session({ secret: "ITM352" }));
 const userInfo = "./public/user_data.json"; // Re-name file path to use in one varibale to be called throughout the server
 const shoppingCartFile = "./public/shopping_cart.json";
 
 var products = data.product_data;
 
 app.use(express.static("./public")); // Accessing data from public file
+app.set("view engine", "ejs");
+app.set("views", __dirname + "/views");
 app.use(myParser.urlencoded({ extended: true }));
 
 // Opening a server to listen to
@@ -31,6 +37,10 @@ if (fs.existsSync(shoppingCartFile)) {
   var shoppingCart = JSON.parse(shoppingCartData);
 }
 
+app.get("/", function (req, res) {
+  res.render("index", {});
+});
+
 // Code taken from Lab14 Ex1.js to retrieve username and password from user_data.json file
 //  For existing user to log in and take shopping cart with them to final invoice
 app.post("/login_user", function (request, response) {
@@ -38,13 +48,10 @@ app.post("/login_user", function (request, response) {
   var username = request.body.username;
   if (typeof users_reg_data[username] != "undefined") {
     if (request.body.password == users_reg_data[username].password) {
-      var newShoppingCart = shoppingCart;
-      newShoppingCart.username = username;
-      newShoppingCart.email = users_reg_data[username].email;
-      fs.writeFileSync(shoppingCartFile, JSON.stringify(newShoppingCart)); // Write information into shopping_cart.json
-      response.send(
-        `Thank you for ${username} logging in<br>Please <a href="/invoice">click here</a> to complete your purchase`
-      );
+      response.redirect("/");
+      // response.send(
+      //   `Thank you for ${username} logging in<br>Please <a href="/invoice">click here</a> to complete your purchase`
+      // );
     } else {
       response.send(
         `Sorry! ${request.body.password} does not match what we have for you`
