@@ -1,4 +1,4 @@
-product_data = [
+var product_data = [
   {
     id: 1,
     name: "Russet Potatoes",
@@ -85,3 +85,5 @@ product_data = [
     type: "onion",
   },
 ];
+
+module.exports = product_data;

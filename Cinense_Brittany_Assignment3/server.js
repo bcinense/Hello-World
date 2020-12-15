@@ -1,6 +1,6 @@
 var express = require("express"); // Run express
 var myParser = require("body-parser"); // Run body-parser
-var data = require("./public/product_data.js"); // Import and run product_data.js from the public folder
+var products = require("./public/product_data.js"); // Import and run product_data.js from the public folder
 var app = express(); // Initialize express
 var fs = require("fs"); // Require the File System module
 var cookieParser = require("cookie-parser");
@@ -11,9 +11,7 @@ app.use(session({ secret: "ITM352" }));
 const userInfo = "./public/user_data.json"; // Re-name file path to use in one varibale to be called throughout the server
 const shoppingCartFile = "./public/shopping_cart.json";
 
-var products = data.product_data;
-
-app.use(express.static("./public")); // Accessing data from public file
+app.use(express.static("public")); // Accessing data from public file
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
 app.use(myParser.urlencoded({ extended: true }));
@@ -38,7 +36,7 @@ if (fs.existsSync(shoppingCartFile)) {
 }
 
 app.get("/", function (req, res) {
-  res.render("index", {});
+  res.render("index", { products: products, type: req.query.type });
 });
 
 // Code taken from Lab14 Ex1.js to retrieve username and password from user_data.json file

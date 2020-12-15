@@ -3,7 +3,7 @@
 
 <head>
     <!-- Link stylesheet -->
-    <link rel="stylesheet" type="text/css" href="../public/index.css" />
+    <link rel="stylesheet" type="text/css" href='/stylesheets/index.css' />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -37,7 +37,7 @@
     </div>
     </div>
     <form name="cart" action="./process_cart" method="POST">
-        <script>
+        <!-- <script>
             // Modified code from url "https://developer.mozilla.org/en-US/docs/Web/API/URL/searchParams"
             // to parse out the type of each product from the navbar.
             var params = (new URL(document.location)).searchParams;
@@ -59,7 +59,17 @@
                 </div>`);
                 }
             }
-        </script>
+        </script> -->
+<% for(let i =0;i < products.length; i++){ %>
+<% if(products[i].type === type || type === undefined) { %> 
+        <div id="imageContainer">
+            <img src="<%= products[i].image %>" alt="<%= products[i].name %>" />
+            <h3> <%= products[i].name %> </h3>
+            <p><%= products[i].price.toFixed(2) + '/lb' %> </p>
+            <input type="number" min="0" max="10" value="0" name="<%= products[i].id %> ">
+        </div>
+    <% } %> 
+<% } %>
 
         <!-- Modified code for drop-down feature from W3schools.com, 
    reference link: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_js_dropdown -->
