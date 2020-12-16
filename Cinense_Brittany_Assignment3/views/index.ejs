@@ -10,6 +10,8 @@
     <title>FarmFresh</title>
     <!-- Created top navigationbar for login and cart on homepage -->
     <ul class="topnavbar">
+        <!-- If statement to replace login/register in navbar with current user logged in,
+        as well as a logout button when current user is logged in -->
         <% if(name) { %> 
           <li><a href="/logout">Logout</a></li>
         <% } else { %> 
@@ -67,6 +69,11 @@
                 }
             }
         </script> -->
+
+
+
+<!-- //For loop used to output images from product_data.js file,
+// Modified code from for loop code used from SmartPhoneProducts3 to display each product -->
 <% for(let i =0;i < products.length; i++){ %>
 <% if(products[i].type === type || type === undefined) { %> 
         <div id="imageContainer">
