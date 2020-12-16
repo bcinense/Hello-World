@@ -15,7 +15,7 @@
         <% if(name) { %> 
           <li><a href="/logout">Logout</a></li>
         <% } else { %> 
-            <li><a href="./login.html"><img src="./icons/iconlogin.png" class="loginIcon">Login/Register</a></li></img>
+            <li><a href="/login"><img src="./icons/iconlogin.png" class="loginIcon">Login/Register</a></li></img>
         <% } %> 
         <li><a href="#Cart"><img src="./icons/bag.png" class="cartIcon">Cart</a></li></img>
     </ul>
@@ -80,7 +80,7 @@
             <img src="<%= products[i].image %>" alt="<%= products[i].name %>" />
             <h3> <%= products[i].name %> </h3>
             <p><%= products[i].price.toFixed(2) + '/lb' %> </p>
-            <input type="number" min="0" max="10" value="0" name="<%= products[i].id %> ">
+            <input type="number" min="0" max="10" value="0" name="<%= products[i].id %>">
         </div>
     <% } %> 
 <% } %>
@@ -114,7 +114,7 @@
     <br>
     <br>
     <!-- // Render submit addToCart button -->
-<input type="submit" value='Add To Cart' id="addToCart" name="addToCart_button">
+<input type="submit" id="addToCart">
 </footer>
 </form>
 <div class="copyright"> &#169 2020 Farm Fresh, Inc. All Rights Reserved.</div>
