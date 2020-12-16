@@ -1,0 +1,83 @@
+<!-- Invoice table code modified from WOD/SmartPhoneProducts3 -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/cart.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cart</title>
+  </head>
+  <div class="title">
+    <h1><a href="/">Farm<br />Fresh</a></h1>
+    <% if(name){ %>
+    <div>Welcome, <%= name %></div>
+    <% } %>
+  </div>
+  <body>
+    <table border="0" class = "center">
+        <tbody>
+            <tr>
+                <th style="text-align: center" colspan="4" id= "cart_title" ><span style="font-family: sans-serif">Cart</th>
+                </span>
+                <tr>&nbsp;</tr>
+                <tr>&nbsp;</tr>
+                <tr>&nbsp;</tr>
+            </tr>
+            <tr>
+                <th style="text-align: center" width="43%">Item</th>
+                <th style="text-align: center" width="11%">Quantity</th>
+                <th style="text-align: center" width="13%">Price</th>
+                <th style="text-align: center" width="54%">Total</th>
+            </tr>
+                ${invoiceRows}
+                <tr>
+                    <td colspan="4" width="100%">&nbsp;</td>
+                </tr>
+                <!-- Row for Sub-total -->
+                <tr>
+                   
+                    <td>&nbsp;</td>
+                    <td style="text-align: right" colspan="2" width="67%">Sub-total</td>
+                    <td width="54%" style="text-align: center">
+                        $$Subtotal
+                    </td>
+                </tr>
+                <!-- Row for Shipping -->
+                <tr>
+                
+                    <td>&nbsp;</td>
+                    <td style="text-align: right" colspan="2" width="67%">
+                        <span style="font-family: sans-serif">Shipping</span>
+                    </td>
+                    <td width="54%" style="text-align: center">
+                        $$Shipping
+                    </td>
+                </tr>
+                <!-- Row for Tax -->
+                <tr>
+                   
+                    <td>&nbsp;</td>
+                    <td style="text-align: right" colspan="2" width="67%">
+                        <span style="font-family: sans-serif">Tax @ 5.75%</span>
+                    </td>
+                    <td width="54%" style="text-align: center">
+                       $$Tax
+                    </td>
+                </tr>
+                <!-- Row for Total with bold font -->
+                <tr>
+                  
+                    <td>&nbsp;</td>
+                    <td style="text-align: right" colspan="2" width="67%">
+                        <strong>Total</strong>
+                    </td>
+                    <td width="54%" style="text-align: center">
+                        <b>
+                            $$Total
+                        </b>
+                    </td>
+                </tr>
+                </tbody>
+                </table>
+  </body>
+</html>

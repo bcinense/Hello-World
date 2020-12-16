@@ -31,7 +31,6 @@ if (fs.existsSync(userInfo)) {
 // If the name is available from the cookie, pass the name down as a variable with the render
 app.get("/", function (req, res) {
   var name;
-  console.log(req.cookies);
   if (req.cookies && req.cookies.name) {
     name = req.cookies.name;
   }
@@ -48,6 +47,16 @@ app.get("/login", function (req, res) {
 
 app.get("/register", function (req, res) {
   res.render("register");
+});
+
+app.get("/shopping_cart", function (req, res) {
+  var name;
+  if (req.cookies && req.cookies.name) {
+    name = req.cookies.name;
+  }
+  res.render("shopping_cart", {
+    name: name,
+  });
 });
 
 // Code taken from Lab14 Ex1.js to retrieve username and password from user_data.json file
