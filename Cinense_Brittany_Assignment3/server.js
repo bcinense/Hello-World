@@ -36,7 +36,15 @@ if (fs.existsSync(shoppingCartFile)) {
 }
 
 app.get("/", function (req, res) {
-  res.render("index", { products: products, type: req.query.type });
+  var name;
+  if (req.cookies && req.cookies.name) {
+    name = req.cookies.name;
+  }
+  res.render("index", {
+    products: products,
+    type: req.query.type,
+    name: name,
+  });
 });
 
 // Code taken from Lab14 Ex1.js to retrieve username and password from user_data.json file
@@ -46,6 +54,9 @@ app.post("/login_user", function (request, response) {
   var username = request.body.username;
   if (typeof users_reg_data[username] != "undefined") {
     if (request.body.password == users_reg_data[username].password) {
+      response.cookie("name", users_reg_data[username].name, {
+        maxAge: 1000 * 60 * 3,
+      });
       response.redirect("/");
       // response.send(
       //   `Thank you for ${username} logging in<br>Please <a href="/invoice">click here</a> to complete your purchase`
@@ -58,6 +69,11 @@ app.post("/login_user", function (request, response) {
   } else {
     response.send(`Sorry! ${username} does not exist`);
   }
+});
+
+app.get("/logout", function (req, res) {
+  res.cookie("name", "", { expires: new Date(0) });
+  res.redirect("/");
 });
 
 // Function from Lab12
