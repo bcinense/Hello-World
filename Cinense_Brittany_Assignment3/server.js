@@ -35,6 +35,7 @@ if (fs.existsSync(shoppingCartFile)) {
   var shoppingCart = JSON.parse(shoppingCartData);
 }
 
+// If the name is available from the cookie, pass the name down as a variable with the render
 app.get("/", function (req, res) {
   var name;
   if (req.cookies && req.cookies.name) {
@@ -54,6 +55,7 @@ app.post("/login_user", function (request, response) {
   var username = request.body.username;
   if (typeof users_reg_data[username] != "undefined") {
     if (request.body.password == users_reg_data[username].password) {
+      // When user is logged in, the cookie is set to expire in 3 minutes from log in
       response.cookie("name", users_reg_data[username].name, {
         maxAge: 1000 * 60 * 3,
       });
