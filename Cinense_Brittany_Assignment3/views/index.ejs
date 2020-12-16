@@ -2,9 +2,11 @@
 <html lang="en">
 
 <head>
-    <!-- Link stylesheet -->
+    <!-- Link stylesheets -->
     <link rel="stylesheet" type="text/css" href='/stylesheets/index.css' />
+    <!-- stylesheets for icons used for cart and login/register -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FarmFresh</title>
@@ -13,11 +15,11 @@
         <!-- If statement to replace login/register in navbar with current user logged in,
         as well as a logout button when current user is logged in -->
         <% if(name) { %> 
-          <li><a href="/logout">Logout</a></li>
+          <li><a href="/logout">Logout  <i class="fa fa-sign-out" style="font-size:24px"></a></li></i>
         <% } else { %> 
-            <li><a href="/login"><img src="./icons/iconlogin.png" class="loginIcon">Login/Register</a></li></img>
+            <li><a href="/login"><i class="material-icons">person</i>Login/Register</a></li>
         <% } %> 
-        <li><a href="#Cart"><img src="./icons/bag.png" class="cartIcon">Cart</a></li></img>
+        <li><a href="/shopping_cart"><i class="fa fa-shopping-cart" style="font-size:24px">  Cart (0)</a></li></i>
     </ul>
     <br />
     <br />
