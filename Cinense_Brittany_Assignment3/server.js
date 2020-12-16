@@ -9,7 +9,6 @@ var session = require("express-session");
 app.use(cookieParser());
 app.use(session({ secret: "ITM352" }));
 const userInfo = "./public/user_data.json"; // Re-name file path to use in one varibale to be called throughout the server
-const shoppingCartFile = "./public/shopping_cart.json";
 
 app.use(express.static("public")); // Accessing data from public file
 app.set("view engine", "ejs");
@@ -29,16 +28,10 @@ if (fs.existsSync(userInfo)) {
   var users_reg_data = JSON.parse(data); // Parse data, which hold the contents of the objects
 }
 
-// Code to write username to shopping cart, so in the invoice it can grab current username to thank them
-if (fs.existsSync(shoppingCartFile)) {
-  var shoppingCartData = fs.readFileSync(shoppingCartFile, "utf-8");
-  var shoppingCart = JSON.parse(shoppingCartData);
-}
-
 // If the name is available from the cookie, pass the name down as a variable with the render
 app.get("/", function (req, res) {
   var name;
-  console.log(req.session.id);
+  console.log(req.cookies);
   if (req.cookies && req.cookies.name) {
     name = req.cookies.name;
   }
@@ -47,6 +40,14 @@ app.get("/", function (req, res) {
     type: req.query.type,
     name: name,
   });
+});
+
+app.get("/login", function (req, res) {
+  res.render("login");
+});
+
+app.get("/register", function (req, res) {
+  res.render("register");
 });
 
 // Code taken from Lab14 Ex1.js to retrieve username and password from user_data.json file
@@ -58,7 +59,7 @@ app.post("/login_user", function (request, response) {
     if (request.body.password == users_reg_data[username].password) {
       // When user is logged in, the cookie is set to expire in 3 minutes from log in
       response.cookie("name", users_reg_data[username].name, {
-        maxAge: 1000 * 60 * 3,
+        maxAge: 1000 * 60 * 60,
       });
       response.redirect("/");
       // response.send(
@@ -76,6 +77,7 @@ app.post("/login_user", function (request, response) {
 
 app.get("/logout", function (req, res) {
   res.cookie("name", "", { expires: new Date(0) });
+  req.session.destroy();
   res.redirect("/");
 });
 
@@ -91,21 +93,25 @@ function isNonNegInt(q, returnErrors = false) {
 
 app.post("/process_cart", function (request, response) {
   let POST = request.body;
-  console.log(POST);
   var isValid = true;
-  // Go through each product and validate that it is a number higher than 0
   products.forEach(function (product) {
-    var quantityPurchased = POST[product.name];
+    var quantityPurchased = POST[product.id];
     if (!isNonNegInt(quantityPurchased)) {
       isValid = false;
     }
   });
   if (isValid) {
-    var shoppingCartValues = JSON.stringify(POST);
-    fs.writeFileSync(shoppingCartFile, shoppingCartValues);
-
-    // Direct user to register page in order to complete purchase
-    response.sendFile(__dirname + "/public/login.html");
+    // https://stackoverflow.com/questions/19737415/express-creating-cookie-with-json
+    response.cookie("cart", JSON.stringify(POST), {
+      maxAge: 1000 * 60 * 60,
+    });
+    if (!request.cookies.name) {
+      response.redirect("/login");
+    } else {
+      // Go to shopping cart
+    }
+    // // Direct user to register page in order to complete purchase
+    // response.sendFile(__dirname + "/public/login.html");
   } else {
     // If any input is invalid, send response of "Sorry, invalid input"
     response.send(`<p>Sorry, invalid input</p>`);
