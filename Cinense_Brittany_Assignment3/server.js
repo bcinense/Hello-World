@@ -5,7 +5,7 @@ var app = express(); // Initialize express
 var fs = require("fs"); // Require the File System module
 var cookieParser = require("cookie-parser");
 var session = require("express-session");
-const { nextTick, ppid } = require("process");
+
 app.use(cookieParser());
 app.use(session({ secret: "ITM352" }));
 const userInfo = "./public/user_data.json"; // Re-name file path to use in one varibale to be called throughout the server
@@ -38,6 +38,7 @@ if (fs.existsSync(shoppingCartFile)) {
 // If the name is available from the cookie, pass the name down as a variable with the render
 app.get("/", function (req, res) {
   var name;
+  console.log(req.session.id);
   if (req.cookies && req.cookies.name) {
     name = req.cookies.name;
   }
