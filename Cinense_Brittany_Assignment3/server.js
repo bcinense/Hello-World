@@ -48,7 +48,6 @@ app.get("/", function (req, res) {
     }
     return product;
   });
-  console.log(products);
   res.render("index", {
     products: products,
     type: req.query.type,
