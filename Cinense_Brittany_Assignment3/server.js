@@ -31,9 +31,24 @@ if (fs.existsSync(userInfo)) {
 // If the name is available from the cookie, pass the name down as a variable with the render
 app.get("/", function (req, res) {
   var name;
-  if (req.cookies && req.cookies.name) {
-    name = req.cookies.name;
+  var cart;
+  if (req.cookies) {
+    if (req.cookies.name) {
+      name = req.cookies.name;
+    }
+    if (req.cookies.cart) {
+      cart = req.cookies.cart;
+    }
   }
+  products = products.map(function (product) {
+    if (Number.isInteger(parseInt(cart[product.id]))) {
+      product.quantity = parseInt(cart[product.id]);
+    } else {
+      product.quantity = 0;
+    }
+    return product;
+  });
+  console.log(products);
   res.render("index", {
     products: products,
     type: req.query.type,
@@ -63,7 +78,6 @@ app.get("/shopping_cart", function (req, res) {
     if (req.cookies.cart) {
       // add quantity to each product
       cart = JSON.parse(req.cookies.cart);
-      console.log(cart);
       shoppingCartProducts = products.map(function (product) {
         product.quantity = parseInt(cart[product.id]);
         return product;

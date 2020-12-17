@@ -81,7 +81,7 @@
             <img src="<%= products[i].image %>" alt="<%= products[i].name %>" />
             <h3> <%= products[i].name %> </h3>
             <p><%='$' + products[i].price.toFixed(2) + '/lb' %> </p>
-            <input type="number" min="0" max="10" value="0" name="<%= products[i].id %>">
+            <input type="number" min="0" max="10" value="<%= products[i].quantity %>" name="<%= products[i].id %>">
         </div>
     <% } %> 
 <% } %>
