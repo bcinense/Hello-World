@@ -117,13 +117,11 @@ app.get("/invoice", function (req, res) {
     if (req.cookies.cart) {
       // if cart is available
       cart = JSON.parse(req.cookies.cart);
-      console.log(cart);
       shoppingCartProducts = products.map(function (product) {
         var quantity = parseInt(cart[product.id]);
         if (Number.isInteger(quantity) && quantity > 0) {
           product.quantity = quantity;
           subtotal += quantity * product.price;
-          console.log(product);
         }
         return product;
       });
