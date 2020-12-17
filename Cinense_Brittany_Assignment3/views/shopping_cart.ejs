@@ -2,138 +2,63 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-    <link rel="stylesheet" type="text/css" href="/stylesheets/cart.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/index.css" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cart</title>
-        <% if(name){ %>
-        <div id = usergreeting>Hello, <%= name %>!</div>
-        <% } %>
+    <% if(name){ %>
+    <div id="usergreeting">Hello, <%= name %>!</div>
+    <% } %>
   </head>
   <div class="title">
-    <h1><a href="/">Farm<br />Fresh</a></h1>
+    <h1>
+      <a href="/">Farm<br />Fresh</a>
+    </h1>
   </div>
   <body>
-    <table border="0" class = "center">
-        <tbody>
-            <tr>
-                <th style="text-align: center" colspan="4" id= "cart_title" ><span style="font-family: sans-serif">Cart</th>
-                </span>
-                <tr>&nbsp;</tr>
-                <tr>&nbsp;</tr>
-                <tr>&nbsp;</tr>
-            </tr>
-            <tr>
-                <th style="text-align: center" width="43%">Item</th>
-                <th style="text-align: center" width="11%">Quantity</th>
-                <th style="text-align: center" width="13%">Price</th>
-                <th style="text-align: center" width="54%">Total</th>
-            </tr>
-                <tr>
-                    <td colspan="4" width="100%">&nbsp;</td>
-                </tr>
-                <!-- Row for Sub-total -->
-                <tr>
-                   
-                    <td>&nbsp;</td>
-                    <td style="text-align: right" colspan="2" width="67%">Sub-total</td>
-                    <td width="54%" style="text-align: center">
-                        $$Subtotal
-                    </td>
-                </tr>
-                <!-- Row for Shipping -->
-                <tr>
-                
-                    <td>&nbsp;</td>
-                    <td style="text-align: right" colspan="2" width="67%">
-                        <span style="font-family: sans-serif">Shipping</span>
-                    </td>
-                    <td width="54%" style="text-align: center">
-                        $$Shipping
-                    </td>
-                </tr>
-                <!-- Row for Tax -->
-                <tr>
-                   
-                    <td>&nbsp;</td>
-                    <td style="text-align: right" colspan="2" width="67%">
-                        <span style="font-family: sans-serif">Tax @ 5.75%</span>
-                    </td>
-                    <td width="54%" style="text-align: center">
-                       $$Tax
-                    </td>
-                </tr>
-                <!-- Row for Total with bold font -->
-                <tr>
-                  
-                    <td>&nbsp;</td>
-                    <td style="text-align: right" colspan="2" width="67%">
-                        <strong>Total</strong>
-                    </td>
-                    <td width="54%" style="text-align: center">
-                        <b>
-                            $$Total
-                        </b>
-                    </td>
-                </tr>
-                <tr>&nbsp;</tr>
-                <tr>
-                    <td style="text-align: left" colspan="2" id= "return_to_cart"><a href = "/" id= "return_to_cart"><i class='fas fa-angle-left' style='font-size:17px'> Return to cart</td></i></a>
-                   <td><th style="text-align: right" colspan="2" id= "purchase">
-                    <a href="/invoice" class="purchaselink"><script>
-                        document.write(
-                            `<input type="submit" value='Purchase' id = "purchaseButton" name="do_purchase">`
-                        );
-                    </script></a></th></td>
-                
-                </tr>
-                <tr>&nbsp;</tr>
-                <td style="text-align: left" colspan="4" id="return_policy">
-                    <!-- Added a modal function (a pop-up/dialog box), copied and modified code
-                    from W3schoolcom or url("https://www.w3schools.com/howto/howto_css_modals.asp") -->
-                    <!-- Trigger/Open The Modal -->
-                    <button id="myBtn">Return Policy</button>
-                
-                    <!-- The Modal -->
-                    <div id="myModal" class="modal">
-                
-                        <!-- Modal content -->
-                        <div class="modal-content">
-                            <span class="close">&times;</span>
-                            <h3>Return Policy</h3>
-                            <p>Exchanges/Returns<br>
-                                All sales are final.</p>
-                        </div>
-                        <script>
-                            // Get the modal
-                            var modal = document.getElementById("myModal");
-
-                            // Get the button that opens the modal
-                            var btn = document.getElementById("myBtn");
-
-                            // Get the <span> element that closes the modal
-                            var span = document.getElementsByClassName("close")[0];
-
-                            // When the user clicks the button, open the modal 
-                            btn.onclick = function () {
-                                modal.style.display = "block";
-                            }
-
-                            // When the user clicks on <span> (x), close the modal
-                            span.onclick = function () {
-                                modal.style.display = "none";
-                            }
-
-                            // When the user clicks anywhere outside of the modal, close it
-                            window.onclick = function (event) {
-                                if (event.target == modal) {
-                                    modal.style.display = "none";
-                                }
-                            }
-                        </script>
-                    </div> </td>
-                </tbody>
-                </table>
+    <h2>Shopping Cart</h2>
+    <form name="purchase" action="/modify" method="POST">
+      <% if(shoppingCartProducts) { %> <% for (let i = 0; i <
+      shoppingCartProducts.length; i++) { %> <%
+      if(shoppingCartProducts[i].quantity && shoppingCartProducts[i].quantity >
+      0){ %>
+      <div id="imageContainer">
+        <img
+          src=" <%= shoppingCartProducts[i].image %>  "
+          alt=" <%= shoppingCartProducts[i].name %>  "
+        />
+        <h3><%= shoppingCartProducts[i].name %></h3>
+        <div>
+          <li>
+            <%='$' + shoppingCartProducts[i].price.toFixed(2) + '/lb' + " x " %>
+          </li>
+          <li>
+            <input
+              type="number"
+              min="0"
+              max="10"
+              value="<%= shoppingCartProducts[i].quantity %>"
+              name="<%= shoppingCartProducts[i].id %>"
+            />
+          </li>
+          <li>
+            <%= " = $" + shoppingCartProducts[i].price *
+            shoppingCartProducts[i].quantity %>
+          </li>
+        </div>
+      </div>
+      <% } %> <% } %> <% } else { %>
+      <div>Please add items to your shopping cart</div>
+      <% } %>
+      <h3>Total: $<%= total %></h3>
+      <h3>Tax: $<%= tax %></h3>
+      <h3>Subtotal: $<%= subtotal %></h3>
+      <footer>
+        <br />
+        <br />
+        <br />
+        <input type="submit" value="Update Quantities" id="addToCart" />
+      </footer>
+    </form>
   </body>
 </html>

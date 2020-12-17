@@ -51,12 +51,47 @@ app.get("/register", function (req, res) {
 
 app.get("/shopping_cart", function (req, res) {
   var name;
-  if (req.cookies && req.cookies.name) {
-    name = req.cookies.name;
+  var cart;
+  var shoppingCartProducts;
+  var total = 0;
+  var subtotal = 0;
+  var tax;
+  if (req.cookies) {
+    if (req.cookies.name) {
+      name = req.cookies.name;
+    }
+    if (req.cookies.cart) {
+      // add quantity to each product
+      cart = JSON.parse(req.cookies.cart);
+      console.log(cart);
+      shoppingCartProducts = products.map(function (product) {
+        product.quantity = parseInt(cart[product.id]);
+        return product;
+      });
+      shoppingCartProducts.forEach(function (product) {
+        if (product.quantity) {
+          total += product.price * product.quantity;
+        }
+      });
+      tax = (total * 0.0575).toFixed(2);
+      subtotal = total + parseInt(tax);
+    }
   }
   res.render("shopping_cart", {
     name: name,
+    shoppingCartProducts: shoppingCartProducts,
+    tax: tax,
+    subtotal: subtotal,
+    total: total,
   });
+});
+
+app.post("/modify", function (req, res) {
+  var POST = req.body;
+  res.cookie("cart", JSON.stringify(POST), {
+    maxAge: 1000 * 60 * 60,
+  });
+  res.redirect("/shopping_cart");
 });
 
 app.get("/invoice", function (req, res) {
@@ -90,6 +125,7 @@ app.post("/login_user", function (request, response) {
 
 app.get("/logout", function (req, res) {
   res.cookie("name", "", { expires: new Date(0) });
+  res.cookie("cart", "", { expires: new Date(0) });
   req.session.destroy();
   res.redirect("/");
 });
@@ -121,7 +157,7 @@ app.post("/process_cart", function (request, response) {
     if (!request.cookies.name) {
       response.redirect("/login");
     } else {
-      // Go to shopping cart
+      response.redirect("/shopping_cart");
     }
     // // Direct user to register page in order to complete purchase
     // response.sendFile(__dirname + "/public/login.html");
