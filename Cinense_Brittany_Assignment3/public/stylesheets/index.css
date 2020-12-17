@@ -13,7 +13,7 @@ ul.topnavbar {
   margin: 10px;
 }
 li {
-  font-size: 25px;
+  font-size: 23px;
   text-align: center;
   display: inline;
   margin-right: 10px;
@@ -63,7 +63,7 @@ input#quantity {
 }
 input#addToCart {
   text-align: center;
-  font-size: 24px;
+  font-size: 23px;
   cursor: pointer;
   display: inline-block;
   box-sizing: border-box;

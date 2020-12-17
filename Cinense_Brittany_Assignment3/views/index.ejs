@@ -13,9 +13,13 @@
     <!-- Created top navigationbar for login and cart on homepage -->
     <ul class="topnavbar">
         <!-- If statement to replace login/register in navbar with current user logged in,
-        as well as a logout button when current user is logged in -->
+        as well as a logout button when current user is logged in -->  
+    <% if(name){ %>
+    <li>Hello, <%= name %>!     </li>
+    <% } %>
         <% if(name) { %> 
-          <li><a href="/logout">Logout  <i class="fa fa-sign-out" style="font-size:24px"></a></li></i>
+          <li>
+              <a href="/logout">Logout  <i class="fa fa-sign-out" style="font-size:24px"></a></li></i>
         <% } else { %> 
             <li><a href="/login"><i class="material-icons">person</i>Login/Register</a></li>
         <% } %> 
@@ -25,12 +29,7 @@
     <br />
 </head>
 <div class="title">
-    <h1>Farm<br />Fresh</h1>
-    <% if(name){ %> 
-        <div>Welcome <%= name %></div>
-    <% } %> 
-</div>
-
+    <h1>Farm<br />Fresh</h1></div>
 <body>
     <h3>Enjoy local produce from local farms all around Oahu!</h3>
     <h2>
