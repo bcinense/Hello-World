@@ -40,6 +40,7 @@ app.get("/", function (req, res) {
       cart = req.cookies.cart;
     }
   }
+  console.log(cart);
   if (cart) {
     products = products.map(function (product) {
       if (Number.isInteger(parseInt(cart[product.id]))) {
@@ -113,6 +114,8 @@ app.get("/invoice", function (req, res) {
   var subtotal = 0;
   var cart;
   var shoppingCartProducts;
+  var name;
+  var email;
   if (req.cookies) {
     if (req.cookies.cart) {
       // if cart is available
@@ -131,12 +134,20 @@ app.get("/invoice", function (req, res) {
       // Calculate grand total
       var total = tax + subtotal;
     }
+    if (req.cookies.email) {
+      email = req.cookies.email;
+    }
+    if (req.cookies.name) {
+      name = req.cookies.name;
+    }
   }
   res.render("invoice", {
     tax: tax,
     total: total,
     subtotal: subtotal,
     shoppingCartProducts: shoppingCartProducts,
+    name: name,
+    email: email,
   });
 });
 
@@ -149,6 +160,9 @@ app.post("/login_user", function (request, response) {
     if (request.body.password == users_reg_data[username].password) {
       // When user is logged in, the cookie is set to expire in 3 minutes from log in
       response.cookie("name", users_reg_data[username].name, {
+        maxAge: 1000 * 60 * 60,
+      });
+      response.cookie("email", users_reg_data[username].email, {
         maxAge: 1000 * 60 * 60,
       });
       response.redirect("/");
