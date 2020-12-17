@@ -19,7 +19,20 @@
                 <th style="text-align: center" width="13%">Price</th>
                 <th style="text-align: center" width="54%">Amount</th>
             </tr>
-            invoice-placeholder
+       <% if(shoppingCartProducts) { %> 
+        <% for (let i = 0; i < shoppingCartProducts.length; i++) { %> 
+            <% if(shoppingCartProducts[i].quantity){ %> 
+        <tr>
+            <th style="text-align: center" width="43%"><%= shoppingCartProducts[i].name %> </td>
+            <td style="text-align: center" width="11%">
+                <%= shoppingCartProducts[i].quantity %>
+                </td>
+            <td style="text-align: center" width="13%"><%= "$" + shoppingCartProducts[i].price.toFixed(2) + '/lb'%></td>
+            <td style="text-align: center" width="54%"><%= "$" + (shoppingCartProducts[i].price * shoppingCartProducts[i].quantity).toFixed(2) %></td>
+        </tr>
+            <% } %> 
+        <% } %> 
+       <% } %> 
             <tr>
                 <td colspan="4" width="100%">&nbsp;</td>
             </tr>
@@ -27,7 +40,7 @@
             <tr>
                 <td style="text-align: center" colspan="3" width="67%">Sub-total</td>
                 <td width="54%">
-                    subtotal-placeholder
+                    <%= "$" + subtotal.toFixed(2) %> 
                 </td>
             </tr>
             <!-- Row for Tax -->
@@ -36,7 +49,7 @@
                     <span style="font-family: arial">Tax @ 5.75%</span>
                 </td>
                 <td width="54%">
-                    tax-placeholder
+                    <%= "$" + tax.toFixed(2) %>
                 </td>
             </tr>
             <!-- Row for Total with bold font -->
@@ -46,7 +59,7 @@
                 </td>
                 <td width="54%">
                     <b>
-                        total-placeholder
+                        <%= "$" + total.toFixed(2) %>
                     </b>
                 </td>
             </tr>

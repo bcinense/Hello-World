@@ -40,14 +40,16 @@ app.get("/", function (req, res) {
       cart = req.cookies.cart;
     }
   }
-  products = products.map(function (product) {
-    if (Number.isInteger(parseInt(cart[product.id]))) {
-      product.quantity = parseInt(cart[product.id]);
-    } else {
-      product.quantity = 0;
-    }
-    return product;
-  });
+  if (cart) {
+    products = products.map(function (product) {
+      if (Number.isInteger(parseInt(cart[product.id]))) {
+        product.quantity = parseInt(cart[product.id]);
+      } else {
+        product.quantity = 0;
+      }
+      return product;
+    });
+  }
   res.render("index", {
     products: products,
     type: req.query.type,
@@ -94,8 +96,8 @@ app.get("/shopping_cart", function (req, res) {
     name: name,
     shoppingCartProducts: shoppingCartProducts,
     tax: tax,
-    subtotal: subtotal,
-    total: total,
+    subtotal: total,
+    total: subtotal,
   });
 });
 
@@ -108,7 +110,36 @@ app.post("/modify", function (req, res) {
 });
 
 app.get("/invoice", function (req, res) {
-  res.render("invoice");
+  var subtotal = 0;
+  var cart;
+  var shoppingCartProducts;
+  if (req.cookies) {
+    if (req.cookies.cart) {
+      // if cart is available
+      cart = JSON.parse(req.cookies.cart);
+      console.log(cart);
+      shoppingCartProducts = products.map(function (product) {
+        var quantity = parseInt(cart[product.id]);
+        if (Number.isInteger(quantity) && quantity > 0) {
+          product.quantity = quantity;
+          subtotal += quantity * product.price;
+          console.log(product);
+        }
+        return product;
+      });
+      // Calculate sales tax
+      var tax_rate = 0.0575;
+      var tax = tax_rate * subtotal;
+      // Calculate grand total
+      var total = tax + subtotal;
+    }
+  }
+  res.render("invoice", {
+    tax: tax,
+    total: total,
+    subtotal: subtotal,
+    shoppingCartProducts: shoppingCartProducts,
+  });
 });
 
 // Code taken from Lab14 Ex1.js to retrieve username and password from user_data.json file

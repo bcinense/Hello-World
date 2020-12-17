@@ -73,6 +73,20 @@ input#addToCart {
   text-shadow: 0 1px rgba(0, 0, 0, 0.1);
   color: #ffffff;
 }
+input#purchaseButton {
+  text-align: center;
+  font-size: 23px;
+  cursor: pointer;
+  display: inline-block;
+  box-sizing: border-box;
+  display: flex;
+  align-self: center;
+  background-color: #1f214a;
+  text-shadow: 0 1px rgba(0, 0, 0, 0.1);
+  color: #ffffff;
+  margin-right: auto;
+  margin-left: auto;
+}
 label {
   font-family: sans-serif;
 }
