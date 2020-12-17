@@ -13,10 +13,11 @@ ul.topnavbar {
   margin: 10px;
 }
 li {
-  font-size: 23px;
+  font-size: 19px;
   text-align: center;
   display: inline;
   margin-right: 10px;
+  font-family: sans-serif;
 }
 h2 {
   text-align: center;

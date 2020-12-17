@@ -12,6 +12,13 @@ input#purchaseButton {
   font-family: sans-serif;
   margin: 0 auto;
 }
+#usergreeting {
+  text-align: right;
+  padding-top: 15px;
+  font-size: 19px;
+  font-family: sans-serif;
+  padding-right: 5px;
+}
 
 #myBtn {
   background-color: white;

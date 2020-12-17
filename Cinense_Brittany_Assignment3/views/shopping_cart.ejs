@@ -7,12 +7,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cart</title>
+        <% if(name){ %>
+        <div id = usergreeting>Hello, <%= name %>!</div>
+        <% } %>
   </head>
   <div class="title">
     <h1><a href="/">Farm<br />Fresh</a></h1>
-    <% if(name){ %>
-    <div>Welcome, <%= name %></div>
-    <% } %>
   </div>
   <body>
     <table border="0" class = "center">
