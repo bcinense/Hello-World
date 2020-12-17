@@ -42,8 +42,8 @@
             />
           </li>
           <li>
-            <%= " = $" + shoppingCartProducts[i].price *
-            shoppingCartProducts[i].quantity %>
+            <%= " = $" + (shoppingCartProducts[i].price *
+            shoppingCartProducts[i].quantity).toFixed(2) %>
           </li>
         </div>
       </div>
