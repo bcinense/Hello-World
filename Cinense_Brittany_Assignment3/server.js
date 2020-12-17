@@ -59,6 +59,10 @@ app.get("/shopping_cart", function (req, res) {
   });
 });
 
+app.get("/invoice", function (req, res) {
+  res.render("invoice");
+});
+
 // Code taken from Lab14 Ex1.js to retrieve username and password from user_data.json file
 //  For existing user to log in and take shopping cart with them to final invoice
 app.post("/login_user", function (request, response) {
