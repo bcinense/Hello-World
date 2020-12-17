@@ -46,7 +46,7 @@
         <a href="/?type=tomato">Tomatoes</a>
     </div>
     </div>
-    <form name="cart" action="./process_cart" method="POST">
+    <form name="cart" action="/process_cart" method="POST">
         <!-- <script>
             // Modified code from url "https://developer.mozilla.org/en-US/docs/Web/API/URL/searchParams"
             // to parse out the type of each product from the navbar.
@@ -80,7 +80,7 @@
         <div id="imageContainer">
             <img src="<%= products[i].image %>" alt="<%= products[i].name %>" />
             <h3> <%= products[i].name %> </h3>
-            <p><%= products[i].price.toFixed(2) + '/lb' %> </p>
+            <p><%='$' + products[i].price.toFixed(2) + '/lb' %> </p>
             <input type="number" min="0" max="10" value="0" name="<%= products[i].id %>">
         </div>
     <% } %> 
