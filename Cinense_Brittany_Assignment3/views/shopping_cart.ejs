@@ -50,9 +50,9 @@
       <% } %> <% } %> <% } else { %>
       <div>Please add items to your shopping cart</div>
       <% } %>
-      <h3>Total: $<%= total %></h3>
-      <h3>Tax: $<%= tax %></h3>
-      <h3>Subtotal: $<%= subtotal %></h3>
+      <h3>Total: $<%= total.toFixed(2) %></h3>
+      <h3>Tax: $<%= (tax).toFixed(2) %></h3>
+      <h3>Subtotal: $<%= subtotal.toFixed(2) %></h3>
       <footer>
         <br />
         <br />

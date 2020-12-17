@@ -86,7 +86,7 @@ app.get("/shopping_cart", function (req, res) {
           total += product.price * product.quantity;
         }
       });
-      tax = (total * 0.0575).toFixed(2);
+      tax = total * 0.0575;
       subtotal = total + parseInt(tax);
     }
   }
