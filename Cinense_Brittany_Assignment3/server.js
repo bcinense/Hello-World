@@ -74,7 +74,7 @@ app.get("/shopping_cart", function (req, res) {
   var shoppingCartProducts;
   var total = 0;
   var subtotal = 0;
-  var tax;
+  var tax = 0;
   if (req.cookies) {
     if (req.cookies.name) {
       name = req.cookies.name;
