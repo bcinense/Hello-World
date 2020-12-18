@@ -1,70 +1,92 @@
 <html lang="en">
-    <head>
-        <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-        <link rel="stylesheet" type="text/css" href="/stylesheets/invoice.css" />
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Invoice</title>
-    </head>
-    <!-- Invoice template used from Invoice WODS-->
-    <table border="2">
-        <tbody>
-            <tr>
-                <th style="text-align: center" colspan="4"><span style="font-family: cursive">Local Produce Invoice</th>
-                </span>
-            </tr>
-            <tr>
-                <th style="text-align: center" width="43%">Item</th>
-                <th style="text-align: center" width="11%">Quantity</th>
-                <th style="text-align: center" width="13%">Price</th>
-                <th style="text-align: center" width="54%">Amount</th>
-            </tr>
-       <% if(shoppingCartProducts) { %> 
-        <% for (let i = 0; i < shoppingCartProducts.length; i++) { %> 
-            <% if(shoppingCartProducts[i].quantity){ %> 
+  <head>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/invoice.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invoice</title>
+  </head>
+  <body>
+    <div class="receiptgreeting">
+      Thank you for your purchase, <%= name %>.
+      <p>
+        A copy of this invoice will also be sent to your email at <%= email %> .
+      </p>
+    </div>
+  </body>
+  <!-- Invoice template used from Invoice WODS-->
+  <div class="container">
+    <table border="1" id="invoiceTables">
+      <tbody>
+        <th style="text-align: center" colspan="4">
+          <h1>Farm<br />Fresh</h1>
+          <div class="addressandphonenumber">
+            808 Kamehameha Dr<br />Wahiawa, HI 96786<br />(808) 123 - 4567
+          </div>
+
+          <!-- Display real-time stamp of invoice, modified code from W3schools.com for toDateString() -->
+          <div class="time">
+            <script>
+              var dateNow = new Date();
+              document.write(
+                (document.getElementsByClassName(
+                  "time"
+                ).innerHTML = dateNow.toDateString())
+              );
+            </script>
+          </div>
+          <p></p>
+        </th>
         <tr>
-            <th style="text-align: center" width="43%"><%= shoppingCartProducts[i].name %> </td>
-            <td style="text-align: center" width="11%">
-                <%= shoppingCartProducts[i].quantity %>
-                </td>
-            <td style="text-align: center" width="13%"><%= "$" + shoppingCartProducts[i].price.toFixed(2) + '/lb'%></td>
-            <td style="text-align: center" width="54%"><%= "$" + (shoppingCartProducts[i].price * shoppingCartProducts[i].quantity).toFixed(2) %></td>
+          <th style="text-align: center" width="43%">Item</th>
+          <th style="text-align: center" width="11%">Quantity</th>
+          <th style="text-align: center" width="13%">Price</th>
+          <th style="text-align: center" width="54%">Amount</th>
         </tr>
-            <% } %> 
-        <% } %> 
-       <% } %> 
-            <tr>
-                <td colspan="4" width="100%">&nbsp;</td>
-            </tr>
-            <!-- Row for Sub-total -->
-            <tr>
-                <td style="text-align: center" colspan="3" width="67%">Sub-total</td>
-                <td width="54%">
-                    <%= "$" + subtotal.toFixed(2) %> 
-                </td>
-            </tr>
-            <!-- Row for Tax -->
-            <tr>
-                <td style="text-align: center" colspan="3" width="67%">
-                    <span style="font-family: arial">Tax @ 5.75%</span>
-                </td>
-                <td width="54%">
-                    <%= "$" + tax.toFixed(2) %>
-                </td>
-            </tr>
-            <!-- Row for Total with bold font -->
-            <tr>
-                <td style="text-align: center" colspan="3" width="67%">
-                    <strong>Total</strong>
-                </td>
-                <td width="54%">
-                    <b>
-                        <%= "$" + total.toFixed(2) %>
-                    </b>
-                </td>
-            </tr>
-        </tbody>
+        <% if(shoppingCartProducts) { %> <% for (let i = 0; i <
+        shoppingCartProducts.length; i++) { %> <%
+        if(shoppingCartProducts[i].quantity){ %>
+        <tr>
+          <td style="text-align: center" width="43%">
+            <%= shoppingCartProducts[i].name %>
+          </td>
+          <td style="text-align: center" width="11%">
+            <%= shoppingCartProducts[i].quantity %>
+          </td>
+          <td style="text-align: center" width="13%">
+            <%= "$" + shoppingCartProducts[i].price.toFixed(2) + '/lb'%>
+          </td>
+          <td style="text-align: center" width="54%">
+            <%= "$" + (shoppingCartProducts[i].price *
+            shoppingCartProducts[i].quantity).toFixed(2) %>
+          </td>
+        </tr>
+        <% } %> <% } %> <% } %>
+        <tr>
+          <td colspan="4" width="100%">&nbsp;</td>
+        </tr>
+        <!-- Row for Sub-total -->
+        <tr>
+          <td style="text-align: center" colspan="3" width="67%">Sub-total</td>
+          <td width="54%"><%= "$" + subtotal.toFixed(2) %></td>
+        </tr>
+        <!-- Row for Tax -->
+        <tr>
+          <td style="text-align: center" colspan="3" width="67%">
+            <span style="font-family: arial">Tax @ 5.75%</span>
+          </td>
+          <td width="54%"><%= "$" + tax.toFixed(2) %></td>
+        </tr>
+        <!-- Row for Total with bold font -->
+        <tr>
+          <td style="text-align: center" colspan="3" width="67%">
+            <strong>Total</strong>
+          </td>
+          <td width="54%">
+            <b> <%= "$" + total.toFixed(2) %> </b>
+          </td>
+        </tr>
+      </tbody>
     </table>
-    <strong>Thank you for your purchase, <%= name %> . <br>A copy of this invoice will also be sent to your
-        email at <%= email %>.</strong>
+  </div>
 </html>
