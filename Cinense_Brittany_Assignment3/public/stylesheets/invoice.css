@@ -19,6 +19,7 @@ h1 {
   border-top-color: #404040;
   border-bottom-style: double;
   font-weight: lighter;
+  margin-bottom: 20px;
 }
 #invoiceTables {
   margin-left: auto;
@@ -26,7 +27,7 @@ h1 {
   background-position: left top;
   background-repeat: repeat;
   padding: 20px;
-  width: 200px;
+  width: 500px;
   height: 150px;
   font-family: sans-serif;
 }
