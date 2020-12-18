@@ -196,7 +196,7 @@ app.post("/login_user", function (request, response) {
   var username = request.body.username;
   if (typeof users_reg_data[username] != "undefined") {
     if (request.body.password == users_reg_data[username].password) {
-      // When user is logged in, the cookie is set to expire in 3 minutes from log in
+      // When user is logged in, the cookie is set to expire in 60 minutes from log in
       response.cookie("name", users_reg_data[username].name, {
         maxAge: 1000 * 60 * 60,
       });
@@ -205,11 +205,13 @@ app.post("/login_user", function (request, response) {
       });
       response.redirect("/");
     } else {
+      // If user enters wrong password or password not on file send error message
       response.send(
         `Sorry! ${request.body.password} does not match what we have for you`
       );
     }
   } else {
+    // If user enters username not on file or wrong username send error message
     response.send(`Sorry! ${username} does not exist`);
   }
 });
