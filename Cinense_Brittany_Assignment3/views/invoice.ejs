@@ -38,12 +38,14 @@
           <br />
           <!-- Invoice template used from WOD/Invoice but converted to ejs template with ejs syntax -->
         </th>
+
         <tr>
           <th style="text-align: center" width="43%">Item</th>
           <th style="text-align: center" width="11%">Quantity</th>
           <th style="text-align: center" width="13%">Price</th>
           <th style="text-align: center" width="54%">Amount</th>
         </tr>
+
         <% if(shoppingCartProducts) { %> <% for (let i = 0; i <
         shoppingCartProducts.length; i++) { %> <%
         if(shoppingCartProducts[i].quantity){ %>
@@ -68,22 +70,26 @@
         </tr>
         <!-- Row for Sub-total -->
         <tr>
-          <td style="text-align: center" colspan="3" width="67%">Sub-total</td>
-          <td width="54%"><%= "$" + subtotal.toFixed(2) %></td>
+          <td style="text-align: right" colspan="3" width="67%">Sub-total</td>
+          <td width="54%" style="text-align: center">
+            <%= "$" + subtotal.toFixed(2) %>
+          </td>
         </tr>
         <!-- Row for Tax -->
         <tr>
-          <td style="text-align: center" colspan="3" width="67%">
+          <td style="text-align: right" colspan="3" width="67%">
             <span style="font-family: arial">Tax @ 5.75%</span>
           </td>
-          <td width="54%"><%= "$" + tax.toFixed(2) %></td>
+          <td width="54%" style="text-align: center">
+            <%= "$" + tax.toFixed(2) %>
+          </td>
         </tr>
         <!-- Row for Total with bold font -->
         <tr>
-          <td style="text-align: center" colspan="3" width="67%">
+          <td style="text-align: right" colspan="3" width="67%">
             <strong>Total</strong>
           </td>
-          <td width="54%">
+          <td width="54%" style="text-align: center">
             <b> <%= "$" + total.toFixed(2) %> </b>
           </td>
         </tr>

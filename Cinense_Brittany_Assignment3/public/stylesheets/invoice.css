@@ -21,6 +21,7 @@ h1 {
   font-weight: lighter;
   margin-bottom: 20px;
 }
+
 #invoiceTables {
   margin-left: auto;
   margin-right: auto;
@@ -36,6 +37,9 @@ h1 {
   margin-left: auto;
   margin-right: auto;
   border: none;
+}
+#invoiceTables th {
+  text-decoration-line: underline;
 }
 
 .time {
