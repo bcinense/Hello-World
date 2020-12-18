@@ -3,6 +3,8 @@ var myParser = require("body-parser"); // Run body-parser
 var products = require("./public/product_data.js"); // Import and run product_data.js from the public folder
 var app = express(); // Initialize express
 var fs = require("fs"); // Require the File System module
+var ejs = require("ejs");
+var nodemailer = require("nodemailer");
 var cookieParser = require("cookie-parser");
 var session = require("express-session");
 
@@ -121,6 +123,7 @@ app.get("/invoice", function (req, res) {
   var shoppingCartProducts;
   var name;
   var email;
+  var templateString;
   if (req.cookies) {
     if (req.cookies.cart) {
       // if cart is available
@@ -151,14 +154,38 @@ app.get("/invoice", function (req, res) {
   if (!name) {
     res.redirect("/login");
   } else {
-    res.render("invoice", {
+    var data = {
       tax: tax,
       total: total,
       subtotal: subtotal,
       shoppingCartProducts: shoppingCartProducts,
       name: name,
       email: email,
+    };
+    // Convert ejs template into string
+    // https://stackoverflow.com/a/35305584
+    ejs.renderFile("./views/invoice.ejs", data, {}, function (err, html) {
+      templateString = html;
     });
+    // Email invoice to user when complete
+    // https://dport96.github.io/ITM352/morea/180.Assignment3/reading-code-examples.html
+    var transporter = nodemailer.createTransport({
+      host: "mail.hawaii.edu",
+      port: 25,
+      secure: false, // use TLS
+      tls: {
+        // do not fail on invalid certs
+        rejectUnauthorized: false,
+      },
+    });
+    var mailOptions = {
+      from: "farmfresh.com",
+      to: email,
+      subject: "Your Farm Fresh invoice",
+      html: templateString,
+    };
+    transporter.sendMail(mailOptions, function (error, info) {});
+    res.render("invoice", data);
   }
 });
 
@@ -177,9 +204,6 @@ app.post("/login_user", function (request, response) {
         maxAge: 1000 * 60 * 60,
       });
       response.redirect("/");
-      // response.send(
-      //   `Thank you for ${username} logging in<br>Please <a href="/invoice">click here</a> to complete your purchase`
-      // );
     } else {
       response.send(
         `Sorry! ${request.body.password} does not match what we have for you`
