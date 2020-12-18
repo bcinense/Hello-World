@@ -14,6 +14,7 @@ input#purchaseButton {
 }
 #usergreeting {
   text-align: right;
+  color: red;
   padding-top: 15px;
   font-size: 19px;
   font-family: sans-serif;
