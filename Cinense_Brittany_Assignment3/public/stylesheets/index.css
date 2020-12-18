@@ -106,6 +106,7 @@ label {
   margin-right: 10px;
 }
 footer {
+  margin-top: 20px;
   display: flex;
   justify-content: center;
   font-family: sans-serif;
