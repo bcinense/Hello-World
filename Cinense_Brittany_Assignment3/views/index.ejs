@@ -1,98 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <!-- Link stylesheets -->
-    <link rel="stylesheet" type="text/css" href='/stylesheets/index.css' />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/index.css" />
     <!-- stylesheets for icons used for cart and login/register -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FarmFresh</title>
     <!-- Created top navigationbar for login and cart on homepage -->
     <ul class="topnavbar">
-        <!-- If statement to replace login/register in navbar with current user logged in,
-        as well as a logout button when current user is logged in -->  
-    <% if(name){ %>
-    <li>Hello, <%= name %>!     </li>
-    <% } %>
-        <% if(name) { %> 
-          <li>
-              <a href="/logout">Logout  <i class="fa fa-sign-out" style="font-size:24px"></a></li></i>
-        <% } else { %> 
-            <li><a href="/login"><i class="material-icons">person</i>Login/Register</a></li>
-        <% } %> 
-        <!-- Render count variable -->
-        <li><a href="/shopping_cart"><i class="fa fa-shopping-cart" style="font-size:24px"></i>  Cart (<%= count || 0 %>)</a></li>
+      <!-- If statement to replace login/register in navbar with current user logged in,
+        as well as a logout button when current user is logged in -->
+      <% if(name){ %>
+      <li>Hello, <%= name %>!</li>
+      <% } %> <% if(name) { %>
+      <li>
+        <a href="/logout"
+          >Logout <i class="fa fa-sign-out" style="font-size: 24px"></i
+        ></a>
+      </li>
+      <% } else { %>
+      <li>
+        <a href="/login"><i class="material-icons">person</i>Login/Register</a>
+      </li>
+      <% } %>
+      <!-- Render count variable -->
+      <li>
+        <a href="/shopping_cart"
+          ><i class="fa fa-shopping-cart" style="font-size: 24px"></i> Cart (<%=
+          count || 0 %>)</a
+        >
+      </li>
     </ul>
     <br />
     <br />
-</head>
-<div class="title">
-    <h1>Farm<br />Fresh</h1></div>
-<body>
-    <h3>Enjoy local produce from local farms all around Oahu!</h3>
-    <h2>
-        <!-- Modified code for drop-down feature from W3schools.com, 
+  </head>
+  <div class="title">
+    <h1>Farm<br />Fresh</h1>
+  </div>
+  <h3>Enjoy local produce from local farms all around Oahu!</h3>
+  <h2>
+    <!-- Modified code for drop-down feature from W3schools.com, 
       reference link: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_js_dropdown -->
-        <div class="dropdown">
-            <button onclick="shopDropdown()" class="dropbtn">Shop<i class="material-icons">expand_more</i></button>
-    </h2>
-    <div id="myDropdown" class="dropdown-content">
-        <a href="/">All</a>
-        <a href="/?type=onion">Onions</a>
-        <a href="/?type=mushroom">Mushrooms</a>
-        <a href="/?type=potato">Potatoes</a>
-        <a href="/?type=tomato">Tomatoes</a>
+    <div class="dropdown">
+      <button onclick="shopDropdown()" class="dropbtn">
+        Shop<i class="material-icons">expand_more</i>
+      </button>
     </div>
-    </div>
-    <form name="cart" action="/process_cart" method="POST">
-<!-- //For loop used to output images from product_data.js file,
+  </h2>
+  <div id="myDropdown" class="dropdown-content">
+    <a href="/">All</a>
+    <a href="/?type=onion">Onions</a>
+    <a href="/?type=mushroom">Mushrooms</a>
+    <a href="/?type=potato">Potatoes</a>
+    <a href="/?type=tomato">Tomatoes</a>
+  </div>
+  <!-- //For loop used to output images from product_data.js file,
 // Modified code from for loop code used from SmartPhoneProducts3 to display each product -->
-<% for(let i =0;i < products.length; i++){ %>
-<% if(products[i].type === type || type === undefined) { %> 
-        <div id="imageContainer">
-            <img src="<%= products[i].image %>" alt="<%= products[i].name %>" />
-            <h3> <%= products[i].name %> </h3>
-            <p><%='$' + products[i].price.toFixed(2) + '/lb' %> </p>
-            <input type="number" min="0" max="10" value="0" name="<%= products[i].id %>">
-        </div>
-    <% } %> 
-<% } %>
+  <% for(let i =0;i < products.length; i++){ %> <% if(products[i].type === type
+  || type === undefined) { %>
+  <div id="imageContainer">
+    <form action="/add_to_cart" name="<%= products[i].id %>" method="POST">
+      <img src="<%= products[i].image %>" alt="<%= products[i].name %>" />
+      <h3><%= products[i].name %></h3>
+      <p><%='$' + products[i].price.toFixed(2) + '/lb' %></p>
+      <input
+        type="number"
+        min="0"
+        max="10"
+        value="0"
+        name="<%= products[i].id %>"
+      />
+      <br />
+      <input type="submit" id="addToCart" value="Add to Cart" />
+    </form>
+  </div>
+  <% } %> <% } %>
 
-        <!-- Modified code for drop-down feature from W3schools.com, 
+  <!-- Modified code for drop-down feature from W3schools.com, 
    reference link: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_js_dropdown -->
-        <script>
-            /* When the user clicks on the button, 
+  <script>
+    /* When the user clicks on the button, 
             toggle between hiding and showing the dropdown content */
-            function shopDropdown() {
-                document.getElementById("myDropdown").classList.toggle("show");
-            }
+    function shopDropdown() {
+      document.getElementById("myDropdown").classList.toggle("show");
+    }
 
-            // Close the dropdown if the user clicks outside of it
-            window.onclick = function (event) {
-                if (!event.target.matches('.dropbtn')) {
-                    var dropdowns = document.getElementsByClassName("dropdown-content");
-                    var i;
-                    for (i = 0; i < dropdowns.length; i++) {
-                        var openDropdown = dropdowns[i];
-                        if (openDropdown.classList.contains('show')) {
-                            openDropdown.classList.remove('show');
-                        }
-                    }
-                }
-            }
-        </script>
-</body>
-<footer>
-    <br>
-    <br>
-    <br>
-    <!-- // Render submit addToCart button -->
-<input type="submit" id="addToCart">
-</footer>
-</form>
-<div class="copyright"> &#169 2020 Farm Fresh, Inc. All Rights Reserved.</div>
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function (event) {
+      if (!event.target.matches(".dropbtn")) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains("show")) {
+            openDropdown.classList.remove("show");
+          }
+        }
+      }
+    };
+  </script>
 
+  <footer></footer>
+  <div class="copyright">© 2020 Farm Fresh, Inc. All Rights Reserved.</div>
 </html>

@@ -223,3 +223,33 @@ app.post("/process_cart", function (request, response) {
     response.send(`<p>Sorry, invalid input</p>`);
   }
 });
+
+// Use object methods to capture POST value and key of the product being added
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_objects/Object/values
+app.post("/add_to_cart", function (req, res) {
+  var POST = req.body;
+  var cart = {};
+  console.log(POST);
+  if (req.cookies.cart) {
+    // If cart exists
+    cart = JSON.parse(req.cookies.cart);
+
+    // Capture id of the product being added
+    var id = Object.keys(POST)[0];
+    if (cart.hasOwnProperty(id)) {
+      // If existing item exists in cart, add on to existing value of that item
+      var value = parseInt(Object.values(POST)[0]);
+      POST[id] = parseInt(cart[id]) + value;
+    } else {
+      // Merge two objects
+      // https://stackoverflow.com/questions/171251/how-can-i-merge-properties-of-two-javascript-objects-dynamically
+      POST = { ...POST, ...cart };
+    }
+  }
+  // Add or replace the cart cookie
+  res.cookie("cart", JSON.stringify(POST), {
+    maxAge: 1000 * 60 * 60,
+  });
+  // Stay on the same page
+  res.redirect("/");
+});
