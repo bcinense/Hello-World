@@ -171,7 +171,7 @@ app.get("/invoice", function (req, res) {
     // https://dport96.github.io/ITM352/morea/180.Assignment3/reading-code-examples.html
     var transporter = nodemailer.createTransport({
       host: "mail.hawaii.edu",
-      port: 25,
+      port: 8080,
       secure: false, // use TLS
       tls: {
         // do not fail on invalid certs
