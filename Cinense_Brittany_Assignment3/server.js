@@ -93,13 +93,17 @@ app.get("/shopping_cart", function (req, res) {
       subtotal = total + parseInt(tax);
     }
   }
-  res.render("shopping_cart", {
-    name: name,
-    shoppingCartProducts: shoppingCartProducts,
-    tax: tax,
-    subtotal: total,
-    total: subtotal,
-  });
+  if (!name) {
+    res.redirect("/login");
+  } else {
+    res.render("shopping_cart", {
+      name: name,
+      shoppingCartProducts: shoppingCartProducts,
+      tax: tax,
+      subtotal: total,
+      total: subtotal,
+    });
+  }
 });
 
 app.post("/modify", function (req, res) {
@@ -142,14 +146,18 @@ app.get("/invoice", function (req, res) {
       name = req.cookies.name;
     }
   }
-  res.render("invoice", {
-    tax: tax,
-    total: total,
-    subtotal: subtotal,
-    shoppingCartProducts: shoppingCartProducts,
-    name: name,
-    email: email,
-  });
+  if (!name) {
+    res.redirect("/login");
+  } else {
+    res.render("invoice", {
+      tax: tax,
+      total: total,
+      subtotal: subtotal,
+      shoppingCartProducts: shoppingCartProducts,
+      name: name,
+      email: email,
+    });
+  }
 });
 
 // Code taken from Lab14 Ex1.js to retrieve username and password from user_data.json file
