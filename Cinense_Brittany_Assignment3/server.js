@@ -93,6 +93,7 @@ app.get("/shopping_cart", function (req, res) {
       subtotal = total + parseInt(tax);
     }
   }
+  // If not logged in, redirect user to login page
   if (!name) {
     res.redirect("/login");
   } else {
@@ -146,6 +147,7 @@ app.get("/invoice", function (req, res) {
       name = req.cookies.name;
     }
   }
+  // If not logged in, redirect user to login page
   if (!name) {
     res.redirect("/login");
   } else {
