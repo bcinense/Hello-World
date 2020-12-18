@@ -23,7 +23,8 @@
         <% } else { %> 
             <li><a href="/login"><i class="material-icons">person</i>Login/Register</a></li>
         <% } %> 
-        <li><a href="/shopping_cart"><i class="fa fa-shopping-cart" style="font-size:24px"></i>  Cart (0)</a></li>
+        <!-- Render count variable -->
+        <li><a href="/shopping_cart"><i class="fa fa-shopping-cart" style="font-size:24px"></i>  Cart (<%= count || 0 %>)</a></li>
     </ul>
     <br />
     <br />
@@ -47,32 +48,6 @@
     </div>
     </div>
     <form name="cart" action="/process_cart" method="POST">
-        <!-- <script>
-            // Modified code from url "https://developer.mozilla.org/en-US/docs/Web/API/URL/searchParams"
-            // to parse out the type of each product from the navbar.
-            var params = (new URL(document.location)).searchParams;
-            var type = params.get('type');
-            //For loop used to output images from product_data.js file, 
-            // For loop code used from SmartPhoneProducts3 to display each product
-            for (i = 0; i < product_data.length; i++) {
-                // Statement to filter navigation bar, if no type is selected show all
-                if (type === product_data[i].type || !type) {
-                    document.write(`
-                <div id = imageContainer>
-                <img src="${product_data[i].image}">
-                <h3>${product_data[i].name}</h3>
-                <p>$${product_data[i].price.toFixed(2) + "/lb"
-                        }</p>
-                <label for="quantity">Quantity
-                <input type="number" id="quantity" name="${product_data[i].name}" min="1" max="10"
-                ${product_data[i].name}">/lb</label>
-                </div>`);
-                }
-            }
-        </script> -->
-
-
-
 <!-- //For loop used to output images from product_data.js file,
 // Modified code from for loop code used from SmartPhoneProducts3 to display each product -->
 <% for(let i =0;i < products.length; i++){ %>
@@ -81,7 +56,7 @@
             <img src="<%= products[i].image %>" alt="<%= products[i].name %>" />
             <h3> <%= products[i].name %> </h3>
             <p><%='$' + products[i].price.toFixed(2) + '/lb' %> </p>
-            <input type="number" min="0" max="10" value="<%= products[i].quantity || 0 %>" name="<%= products[i].id %>">
+            <input type="number" min="0" max="10" value="0" name="<%= products[i].id %>">
         </div>
     <% } %> 
 <% } %>

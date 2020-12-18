@@ -32,37 +32,37 @@ if (fs.existsSync(userInfo)) {
 app.get("/", function (req, res) {
   var name;
   var cart;
+  var count;
   if (req.cookies) {
     if (req.cookies.name) {
       name = req.cookies.name;
     }
     if (req.cookies.cart) {
-      cart = req.cookies.cart;
+      cart = JSON.parse(req.cookies.cart);
+      // Filter out values that equal zero
+      // https://riptutorial.com/javascript/example/1260/filtering-object-arrays
+      count = Object.values(cart).filter(function (number) {
+        return number != 0;
+      }).length;
     }
   }
-  console.log(cart);
-  if (cart) {
-    products = products.map(function (product) {
-      if (Number.isInteger(parseInt(cart[product.id]))) {
-        product.quantity = parseInt(cart[product.id]);
-      } else {
-        product.quantity = 0;
-      }
-      return product;
-    });
-  }
+
   res.render("index", {
+    // Pass down data via object to ejs template
     products: products,
     type: req.query.type,
     name: name,
+    count: count,
   });
 });
 
 app.get("/login", function (req, res) {
+  // Render ejs template for login page
   res.render("login");
 });
 
 app.get("/register", function (req, res) {
+  // Render ejs template for register page
   res.render("register");
 });
 
