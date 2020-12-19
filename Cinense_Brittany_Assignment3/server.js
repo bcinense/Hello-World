@@ -3,7 +3,7 @@ var myParser = require("body-parser"); // Run body-parser
 var products = require("./public/product_data.js"); // Import and run product_data.js from the public folder
 var app = express(); // Initialize express
 var fs = require("fs"); // Require the File System module
-var ejs = require("ejs");
+var ejs = require("ejs"); // Require ejs
 var nodemailer = require("nodemailer");
 var cookieParser = require("cookie-parser");
 var session = require("express-session");
@@ -13,8 +13,8 @@ app.use(session({ secret: "ITM352" }));
 const userInfo = "./public/user_data.json"; // Re-name file path to use in one varibale to be called throughout the server
 
 app.use(express.static("public")); // Accessing data from public file
-app.set("view engine", "ejs");
-app.set("views", __dirname + "/views");
+app.set("view engine", "ejs"); // Enable ejs templating engine
+app.set("views", __dirname + "/views"); // Give access to ejs views
 app.use(myParser.urlencoded({ extended: true }));
 
 // Opening a server to listen to
@@ -27,16 +27,17 @@ if (fs.existsSync(userInfo)) {
   var stats = fs.statSync(userInfo);
 
   var data = fs.readFileSync(userInfo, "utf-8"); // When the file is executed it will read the data in the filename
-  var users_reg_data = JSON.parse(data); // Parse data, which hold the contents of the objects
+  var users_reg_data = JSON.parse(data); // Parse data, which hold the contents of the objects. Reference: https://stackoverflow.com/questions/5047346/converting-strings-like-document-cookie-to-objects
 }
 
-// If the name is available from the cookie, pass the name down as a variable with the render
+// Access homepage
 app.get("/", function (req, res) {
   var name;
   var cart;
   var count;
   if (req.cookies) {
     if (req.cookies.name) {
+      // If the name is available from the cookie, pass the name down as a variable with the render
       name = req.cookies.name;
     }
     if (req.cookies.cart) {
@@ -68,6 +69,7 @@ app.get("/register", function (req, res) {
   res.render("register");
 });
 
+// Access shopping cart
 app.get("/shopping_cart", function (req, res) {
   var name;
   var cart;
@@ -83,11 +85,13 @@ app.get("/shopping_cart", function (req, res) {
       // add quantity to each product
       cart = JSON.parse(req.cookies.cart);
       shoppingCartProducts = products.map(function (product) {
+        // Add quantity to products from cart cookie
         product.quantity = parseInt(cart[product.id]);
         return product;
       });
       shoppingCartProducts.forEach(function (product) {
         if (product.quantity) {
+          // Add the total cost
           total += product.price * product.quantity;
         }
       });
@@ -100,6 +104,7 @@ app.get("/shopping_cart", function (req, res) {
     res.redirect("/login");
   } else {
     res.render("shopping_cart", {
+      // Pass down data via object to shopping cart template
       name: name,
       shoppingCartProducts: shoppingCartProducts,
       tax: tax,
@@ -109,14 +114,18 @@ app.get("/shopping_cart", function (req, res) {
   }
 });
 
+// Modify quantity of shopping cart item
 app.post("/modify", function (req, res) {
   var POST = req.body;
+  // Creating a cookie with a JSON file
+  // https://stackoverflow.com/questions/19737415/express-creating-cookie-with-json
   res.cookie("cart", JSON.stringify(POST), {
     maxAge: 1000 * 60 * 60,
   });
   res.redirect("/shopping_cart");
 });
 
+// Display invoice
 app.get("/invoice", function (req, res) {
   var subtotal = 0;
   var cart;
@@ -128,11 +137,15 @@ app.get("/invoice", function (req, res) {
     if (req.cookies.cart) {
       // if cart is available
       cart = JSON.parse(req.cookies.cart);
+      // Use map to create new array from products with quantity property
       // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
       shoppingCartProducts = products.map(function (product) {
+        // Get
         var quantity = parseInt(cart[product.id]);
         if (Number.isInteger(quantity) && quantity > 0) {
+          // Capture quantity for each item (if available)
           product.quantity = quantity;
+          // Add to subtotal if quantity is available
           subtotal += quantity * product.price;
         }
         return product;
@@ -154,6 +167,7 @@ app.get("/invoice", function (req, res) {
   if (!name) {
     res.redirect("/login");
   } else {
+    // Create data variable to pass down to renderFile for email, and res.render
     var data = {
       tax: tax,
       total: total,
@@ -168,7 +182,7 @@ app.get("/invoice", function (req, res) {
       templateString = html;
     });
     // Email invoice to user when complete
-    // https://dport96.github.io/ITM352/morea/180.Assignment3/reading-code-examples.html
+    // Reference : https://dport96.github.io/ITM352/morea/180.Assignment3/reading-code-examples.html
     var transporter = nodemailer.createTransport({
       host: "mail.hawaii.edu",
       port: 25,
@@ -216,14 +230,16 @@ app.post("/login_user", function (request, response) {
   }
 });
 
+// Destroy session and expire cookies when user logs out
 app.get("/logout", function (req, res) {
   res.cookie("name", "", { expires: new Date(0) });
+  res.cookie("email", "", { expires: new Date(0) });
   res.cookie("cart", "", { expires: new Date(0) });
   req.session.destroy();
   res.redirect("/");
 });
 
-// Function from Lab12
+// Function taken from Lab12
 function isNonNegInt(q, returnErrors = false) {
   errors = []; // assume no errors at first
   if (Number(q) != q) errors.push("Not a number!"); // Check if string is a number value
@@ -272,9 +288,14 @@ app.post("/add_to_cart", function (req, res) {
 
     // Capture id of the product being added
     var id = Object.keys(POST)[0];
+    // Capture value of the product being added
+    var value = parseInt(Object.values(POST)[0]);
+    if (!isNonNegInt(value)) {
+      // If value is invalid, send invalid response
+      response.send(`<p>Sorry, invalid input</p>`);
+    }
     if (cart.hasOwnProperty(id)) {
       // If existing item exists in cart, add on to existing value of that item
-      var value = parseInt(Object.values(POST)[0]);
       POST[id] = parseInt(cart[id]) + value;
     } else {
       // Merge two objects
