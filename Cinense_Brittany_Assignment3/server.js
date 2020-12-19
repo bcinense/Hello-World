@@ -74,9 +74,9 @@ app.get("/shopping_cart", function (req, res) {
   var name;
   var cart;
   var shoppingCartProducts;
-  var total = 0;
+  var total;
   var subtotal = 0;
-  var tax = 0;
+  var tax;
   if (req.cookies) {
     if (req.cookies.name) {
       name = req.cookies.name;
@@ -92,24 +92,26 @@ app.get("/shopping_cart", function (req, res) {
       shoppingCartProducts.forEach(function (product) {
         if (product.quantity) {
           // Add the total cost
-          total += product.price * product.quantity;
+          subtotal += product.price * product.quantity;
         }
       });
-      tax = total * 0.0575;
-      subtotal = total + parseInt(tax);
+      tax = subtotal * 0.0575;
+      total = subtotal + tax;
     }
   }
   // If not logged in, redirect user to login page
   if (!name) {
     res.redirect("/login");
   } else {
+    console.log(total);
+    console.log(subtotal);
     res.render("shopping_cart", {
       // Pass down data via object to shopping cart template
       name: name,
       shoppingCartProducts: shoppingCartProducts,
       tax: tax,
-      subtotal: total,
-      total: subtotal,
+      subtotal: subtotal,
+      total: total,
     });
   }
 });
