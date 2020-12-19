@@ -10,7 +10,7 @@ var session = require("express-session");
 
 app.use(cookieParser());
 app.use(session({ secret: "ITM352" }));
-const userInfo = "./public/user_data.json"; // Re-name file path to use in one varibale to be called throughout the server
+var userInfo = "./public/user_data.json"; // Re-name file path to use in one varibale to be called throughout the server
 
 app.use(express.static("public")); // Accessing data from public file
 app.set("view engine", "ejs"); // Enable ejs templating engine
@@ -282,4 +282,86 @@ app.post("/add_to_cart", function (req, res) {
   });
   // Stay on the same page
   res.redirect("/");
+});
+
+// Created a function to create criterea for the username, minimum 4 characters and max 10 characters
+function validateUsername(username) {
+  console.log(username);
+  if (
+    !users_reg_data[username] &&
+    username.length >= 4 &&
+    username.length <= 10
+  ) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+// Created a function to check that password and confirm password will be the same in order to continue registering
+function validatePassword(password, repeat_password) {
+  console.log(password);
+  console.log(repeat_password);
+  console.log(password == repeat_password);
+  if (password == repeat_password) {
+    console.log("TRUE");
+    return true;
+  } else {
+    console.log("FALSE");
+    return false;
+  }
+}
+// Created a function to create criterea for the email
+function validateEmail(email) {
+  var emailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  // Format validation used from w3resource.com
+  if (email.match(emailformat)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+// Code taken from Lab14 Ex1.js to register new user in the user_data.json file
+app.post("/register_user", function (request, response) {
+  var username = request.body.username;
+  if (validateUsername(username)) {
+    console.log("FIRING 1");
+    users_reg_data[username] = {}; //leave blank
+    if (validatePassword(request.body.password, request.body.repeat_password)) {
+      console.log("FIRING 2");
+      users_reg_data[username].password = request.body.password;
+      if (validateEmail(request.body.email)) {
+        console.log("FIRING 3");
+        users_reg_data[username].email = request.body.email;
+        // Grab both first and last name and put together for the object name
+        users_reg_data[
+          username
+        ].name = `${request.body.firstname} ${request.body.lastname}`;
+        // write updated object to user_reg_info
+        reg_info_str = JSON.stringify(users_reg_data);
+        // will read the new data, parse it and read the new user info
+        fs.writeFileSync(userInfo, reg_info_str);
+        // Save cookies to remember new user
+        response.cookie(
+          "name",
+          `${request.body.firstname} ${request.body.lastname}`,
+          {
+            maxAge: 1000 * 60 * 60,
+          }
+        );
+        response.cookie("email", request.body.email, {
+          maxAge: 1000 * 60 * 60,
+        });
+        // Redirect back to homepage when user is created
+        response.redirect("/");
+      }
+    } else {
+      // Send to a page with a response to go back if passwords do not match
+      response.send("Passwords do not match, please go back and try again");
+    }
+  } else {
+    // Send to a page with a response to go back if username is invalid
+    response.send("Invalid username, please try again");
+  }
 });
