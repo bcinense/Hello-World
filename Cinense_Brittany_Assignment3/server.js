@@ -249,33 +249,6 @@ function isNonNegInt(q, returnErrors = false) {
   return returnErrors ? errors : errors.length > 0 ? false : true;
 }
 
-app.post("/process_cart", function (request, response) {
-  let POST = request.body;
-  var isValid = true;
-  products.forEach(function (product) {
-    var quantityPurchased = POST[product.id];
-    if (!isNonNegInt(quantityPurchased)) {
-      isValid = false;
-    }
-  });
-  if (isValid) {
-    // https://stackoverflow.com/questions/19737415/express-creating-cookie-with-json
-    response.cookie("cart", JSON.stringify(POST), {
-      maxAge: 1000 * 60 * 60,
-    });
-    if (!request.cookies.name) {
-      response.redirect("/login");
-    } else {
-      response.redirect("/shopping_cart");
-    }
-    // // Direct user to register page in order to complete purchase
-    // response.sendFile(__dirname + "/public/login.html");
-  } else {
-    // If any input is invalid, send response of "Sorry, invalid input"
-    response.send(`<p>Sorry, invalid input</p>`);
-  }
-});
-
 // Use object methods to capture POST value and key of the product being added
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_objects/Object/values
 app.post("/add_to_cart", function (req, res) {
